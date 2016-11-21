@@ -9,8 +9,11 @@
 	<!--Scoket.io-->
 	<script src="js/socket.io-1.4.5.js"></script>
 
+	<!--Client Side Global Variables=-->
+	<script src="js/global.js"></script>
+
 	<!--Client Side JS Utilities-->
-	<script src="js/client_util.js"></script>
+	<script src="js/util.js"></script>
 
 </head>
 <body>
@@ -37,6 +40,20 @@
 	socket.on('user', function(count){
 
 		userCounter(count, 'usr');
+
+	});
+
+	//When the server sends everybody's data back
+	socket.on('serverGeoData', function(geodata){
+
+		//Log the data for debugging
+		console.log(geodata);
+
+		//Assign this data globally
+		serverGeo = geodata;
+
+		//Add redraw map function
+
 
 	});
 

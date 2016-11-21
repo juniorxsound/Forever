@@ -15,7 +15,7 @@ Wrriten by juniorxsound (http://phenomenalabs.com)
 */
 
 //Global Variables
-var socket, users, id, userGeoPosition;
+var socket, users, id, userGeoPosition, serverGeo;
 
 function introduction(socket, who){
 
@@ -68,5 +68,9 @@ function getGeoPosition(print, div){
 	    document.getElementById('error').innerHTML = "Oops Sorry, your device doesn't support Geo position"
 
 	}
+
+}
+
+function readServerGeo(){
 
 }

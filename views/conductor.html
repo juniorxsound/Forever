@@ -5,6 +5,12 @@
 	<!--Scoket.io-->
 	<script src="js/socket.io-1.4.5.js"></script>
 
+	<!--Client Side Global Variables=-->
+	<script src="js/global.js"></script>
+
+	<!--Client Side JS Utilities-->
+	<script src="js/util.js"></script>
+
 </head>
 <body>
 <ul>
@@ -43,18 +49,6 @@ var socket, users, id, userGeoPosition;
 		console.log('There are currently ' + count + ' users connected');
 
 	});
-
-	//Wait for a new user from the server save it to a local server
-	// socket.on('id', function(data){
-
-	// 	//Get the users paragraph and print the user to it
-	// 	document.getElementById('id').innerHTML = data;
-
-	// 	id = data;
-
-	// 	console.log('My id is ' + id);
-
-	// });
 </script>
 </body>
 </html>

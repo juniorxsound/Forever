@@ -23,7 +23,7 @@ const ejs = require('ejs');
 //GLOBAL VARIABLES///
 let usersCounter;
 let sockets = {};
-let geolocations = [];
+let geolocations = {};
 let userType;
 
 //Setup the views folder
@@ -73,9 +73,13 @@ io.on('connection', client=>{
 
 	client.on('geolocation', geodata=>{
 
+		//Split Lat and Long into a 2 slot array
+		let processGeoData = geodata.split(',');
+
+		//If there is geo data and the user is a player make magic
 		if (geodata != null && userType == 'player'){
 
-			geolocations[usersCounter - 1] = geodata;
+			geolocations[client.id] = processGeoData;
 
 		}
 
@@ -89,7 +93,8 @@ io.on('connection', client=>{
 				//Remove the user id from the userTable object
 				delete sockets[client.id];
 
-				delete geolocations[usersCounter - 1];
+				//Delete the geodata stored by the client's ID
+				delete geolocations[client.id];
 
 				//Another one bites to dust
 				usersCounter = Object.keys(sockets).length;
@@ -147,10 +152,19 @@ app.get('/*', (req, res) => {
 });
 
 setInterval(function(){
-// console.log(usersCounter);
-// console.log(sockets);
-console.log(geolocations);
-// console.log(usersCounter);
+//Logs for data in the server
+	// console.log(usersCounter);
+	// console.log(sockets);
+	// console.log(geolocations);
+	// console.log(usersCounter);
+
+	//If geolocations has geo data emit it to all users every second
+	if(Object.keys(geolocations) != 0 ){
+
+		io.sockets.emit('serverGeoData', geolocations);
+
+	}
+
 }, 1000);
 
 
