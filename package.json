@@ -1,7 +1,7 @@
 {
-  "name": "Forever - Algorithmic Composition",
+  "name": "",
   "version": "1.0.0",
-  "description": "",
+  "description": "Forever - Algorithmic Composition Using a server and client location",
   "main": "index.js",
   "scripts": {
     "start": "node app.js"
