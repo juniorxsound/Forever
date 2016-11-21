@@ -23,6 +23,7 @@ const ejs = require('ejs');
 //GLOBAL VARIABLES///
 let usersCounter;
 let sockets = {};
+let geolocations = [];
 let userType;
 
 //Setup the views folder
@@ -64,7 +65,7 @@ io.on('connection', client=>{
 
 		} else {
 
-				console.log('Error, type of user not defined');
+				console.log('Error, unknowen user type');
 
 		}
 
@@ -72,9 +73,9 @@ io.on('connection', client=>{
 
 	client.on('geolocation', geodata=>{
 
-		if (geodata != null){
+		if (geodata != null && userType == 'player'){
 
-			console.log(geodata);
+			geolocations[usersCounter - 1] = geodata;
 
 		}
 
@@ -87,6 +88,8 @@ io.on('connection', client=>{
 
 				//Remove the user id from the userTable object
 				delete sockets[client.id];
+
+				delete geolocations[usersCounter - 1];
 
 				//Another one bites to dust
 				usersCounter = Object.keys(sockets).length;
@@ -143,9 +146,11 @@ app.get('/*', (req, res) => {
 
 });
 
-// setInterval(function(){
-// console.log(userTable);
+setInterval(function(){
 // console.log(usersCounter);
-// }, 1000);
+// console.log(sockets);
+console.log(geolocations);
+// console.log(usersCounter);
+}, 1000);
 
 
