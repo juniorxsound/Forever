@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>
+		Forever - Alogirithmic Composition
+	</title>
+
+	<!--Scoket.io-->
+	<script src="js/socket.io-1.4.5.js"></script>
+
+	<!--Client Side JS Utilities-->
+	<script src="js/client_util.js"></script>
+
+</head>
+<body>
+<ul>
+<h1>Forever - Social composition</h1>
+<h2>Users</h2>
+<li id="usr"></li>
+<li id="location"></li>
+<li id="error"></li>
+</ul>
+<script>
+
+	//Decale a new socket connection
+	socket = io();
+
+	//Once your connected log it
+ 	socket.on('connect', function(){
+
+ 		introduction(socket, 'player');
+
+  	});
+
+	//Wait for a new user from the server save it to a local server
+	socket.on('user', function(count){
+
+		userCounter(count, 'usr');
+
+	});
+
+	
+  	setInterval(function(){
+
+	  	var geodata = getGeoPosition(true, 'location');
+
+  	}, 1000);
+</script>
+</body>
+</html>

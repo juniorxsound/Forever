@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Forever - Conductor Panel</title>
+	<!--Scoket.io-->
+	<script src="js/socket.io-1.4.5.js"></script>
+
+</head>
+<body>
+<ul>
+<h1>Forever - Social composition</h1>
+<h2>Conductor Panel</h2>
+<h3>User Count</h3>
+<li id="usr"></li>
+<h3>User ID's</h3>
+<li id="id"></li>
+<h3>Error log</h3>
+<li id="error"></li>
+</ul>
+<!-- <script type="js/client.js"></script> -->
+<script>
+//Global Variables
+var socket, users, id, userGeoPosition;
+
+	//Decale a new socket connection
+	socket = io();
+
+	//Once your connected log it
+ 	socket.on('connect', function(){
+
+ 		socket.emit('introduction', 'conductor');
+
+ 		console.log('Hi Conductor, you are connected to the server');
+
+  	});
+
+	//Wait for a new user from the server save it to a local server
+	socket.on('user', function(count){
+
+		//Get the users paragraph and print the user to it
+		document.getElementById('usr').innerHTML = count;
+
+		console.log('There are currently ' + count + ' users connected');
+
+	});
+
+	//Wait for a new user from the server save it to a local server
+	// socket.on('id', function(data){
+
+	// 	//Get the users paragraph and print the user to it
+	// 	document.getElementById('id').innerHTML = data;
+
+	// 	id = data;
+
+	// 	console.log('My id is ' + id);
+
+	// });
+</script>
+</body>
+</html>
