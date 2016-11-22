@@ -22,3 +22,4 @@ var users;
 var id; 
 var userGeoPosition; 
 var serverGeo;
+var canvasLocations = [];

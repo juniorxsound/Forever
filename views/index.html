@@ -29,15 +29,15 @@
 
 </head>
 <body>
-<ul>
+<div id="interfaceDebug">
 <h1>Forever - Social composition</h1>
 <h2>Users</h2>
-<li id="usr"></li>
-<li id="location"></li>
-<li id="error"></li>
-</ul>
+<div id="usr"></div>
+<div id="location"></div>
+<div id="error"></div>
+</div>
 <script>	
-	'use strict'
+	var canvasLocations = [];
 
 	//Decale a new socket connection
 	socket = io();
@@ -59,32 +59,25 @@ var x = 0
 	//When the server sends everybody's data back
 	socket.on('serverGeoData', function(geodata){
 
+		canvasLocations = [];
+
 		//Log the data for debugging
 		// console.log(geodata);
 
 		//Assign this data globally
 		serverGeo = geodata;
-
 		
-
+		//Iterate over the amount of clients and map the values to canvas
 		for(var i = 0; i < Object.keys(geodata).length; i++){
-
-			// console.log(serverGeo[Object.keys(serverGeo)[i]]);
 
 			var latlong = serverGeo[Object.keys(serverGeo)[i]];
 
 			var mappedY = map(latlong[0], 90, -90, 0, height);
 			var mappedX = map(latlong[1], -180, 180, 0, width);
 
-			// console.log(mappedX + ' ' + mappedY);
+			canvasLocations.push([mappedX, mappedY]);
 
-			background(255,255,255,100);
-
-			point(mappedX, mappedY);
-
-
-
-
+			console.log(mappedX + ' ' + mappedY);
 			
 		}
 
@@ -99,7 +92,16 @@ var x = 0
 
 	};
 
-	function draw(){};
+	function draw(){
+		background(255);
+
+		for(var i = 0; i < canvasLocations.length; i++){
+			var locations = canvasLocations[i];
+			rect(locations[0], locations[1], 10, 10);			
+		}
+
+
+	};
 
 	//Never give up pushing the data!	
   	setInterval(function(){
