@@ -76,6 +76,12 @@ io.on('connection', client=>{
 		//Split Lat and Long into a 2 slot array
 		let processGeoData = geodata.split(',');
 
+		//Make an object out of the array
+		let values = {
+			lat: processGeoData[0],
+			long: processGeoData[1]
+		}
+
 		//If there is geo data and the user is a player make magic
 		if (geodata != null && userType == 'player'){
 

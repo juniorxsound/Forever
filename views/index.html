@@ -9,11 +9,23 @@
 	<!--Scoket.io-->
 	<script src="js/lib/socket.io-1.4.5.js"></script>
 
+	<!-- P5.js -->
+	<script src="js/lib/p5.min.js"></script>
+
+	<!-- Tone.js -->
+	<script src="js/lib/Tone.min.js"></script>
+
 	<!--Client Side Global Variables=-->
 	<script src="js/src/global.js"></script>
 
 	<!--Client Side JS Utilities-->
 	<script src="js/src/util.js"></script>
+
+	<!-- Canvas and p5.js Utilities -->
+	<script type="js/src/canvas.js"></script>
+
+	<!--Client Side CSS-->
+	<link rel="stylesheet" href="css/client.css">
 
 </head>
 <body>
@@ -24,7 +36,8 @@
 <li id="location"></li>
 <li id="error"></li>
 </ul>
-<script>
+<script>	
+	'use strict'
 
 	//Decale a new socket connection
 	socket = io();
@@ -42,22 +55,53 @@
 		userCounter(count, 'usr');
 
 	});
-
+var x = 0
 	//When the server sends everybody's data back
 	socket.on('serverGeoData', function(geodata){
 
 		//Log the data for debugging
-		console.log(geodata);
+		// console.log(geodata);
 
 		//Assign this data globally
 		serverGeo = geodata;
 
-		//Add redraw map function
+		
+
+		for(var i = 0; i < Object.keys(geodata).length; i++){
+
+			// console.log(serverGeo[Object.keys(serverGeo)[i]]);
+
+			var latlong = serverGeo[Object.keys(serverGeo)[i]];
+
+			var mappedY = map(latlong[0], 90, -90, 0, height);
+			var mappedX = map(latlong[1], -180, 180, 0, width);
+
+			// console.log(mappedX + ' ' + mappedY);
+
+			background(255,255,255,100);
+
+			point(mappedX, mappedY);
+
+
+
+
+			
+		}
 
 
 	});
 
-	
+	function preload(){};
+
+	function setup(){
+
+		createCanvas(windowWidth, windowHeight);
+
+	};
+
+	function draw(){};
+
+	//Never give up pushing the data!	
   	setInterval(function(){
 
 	  	var geodata = getGeoPosition(true, 'location');
