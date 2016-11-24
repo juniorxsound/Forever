@@ -41,6 +41,8 @@ function introduction(socket, who){
 
 function userCounter(count, div){
 
+    users = count;
+
 		//Get the users paragraph and print the user to it
 		document.getElementById(div).innerHTML = count;
 

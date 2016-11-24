@@ -160,8 +160,8 @@ app.get('/*', (req, res) => {
 setInterval(function(){
 //Logs for data in the server
 	// console.log(usersCounter);
-	// console.log(sockets);
-	// console.log(geolocations);
+	 // console.log(sockets);
+	 // console.log(geolocations);
 	// console.log(usersCounter);
 
 	//If geolocations has geo data emit it to all users every second
@@ -171,6 +171,6 @@ setInterval(function(){
 
 	}
 
-}, 1000);
+}, 500);
 
 

@@ -13,7 +13,7 @@
 	<script src="js/lib/p5.min.js"></script>
 
 	<!-- Tone.js -->
-	<script src="js/lib/Tone.min.js"></script>
+	<script src="js/lib/p5.sound.min.js"></script>
 
 	<!--Client Side Global Variables=-->
 	<script src="js/src/global.js"></script>
@@ -36,8 +36,7 @@
 <div id="location"></div>
 <div id="error"></div>
 </div>
-<script>	
-	var canvasLocations = [];
+<script>
 
 	//Decale a new socket connection
 	socket = io();
@@ -55,7 +54,7 @@
 		userCounter(count, 'usr');
 
 	});
-var x = 0
+
 	//When the server sends everybody's data back
 	socket.on('serverGeoData', function(geodata){
 
@@ -84,21 +83,70 @@ var x = 0
 
 	});
 
+
+
 	function preload(){};
 
 	function setup(){
 
+		//Setting up a canvas
 		createCanvas(windowWidth, windowHeight);
+
+		//Setting up a test oscilator
+		  osc = new p5.Oscillator();
+		  osc.setType('sine');
+		  osc.freq(random(440, 880));
+		  osc.amp(0);
+		  osc.start();
 
 	};
 
+
+
 	function draw(){
+
+		//Draw a white background
 		background(255);
 
+		//Transport courser increment
+		transportLine = transportLine + 0.3;
+
+		//Courser
+		line(transportLine, height, transportLine, 0);
+
+		//Make it repeat and count cycles
+		if(transportLine == width){
+
+			transportLine = 0;
+
+			cycleCounter++;
+
+		} 
+
+		//Iterate over the array that stores users pixel postions
 		for(var i = 0; i < canvasLocations.length; i++){
+
 			var locations = canvasLocations[i];
-			rect(locations[0], locations[1], 10, 10);			
+
+			//Draw a rect for each user
+			rect(locations[0], locations[1], 5, 5);
+
+			//If the courser reaches a user trigger the synth
+			if(transportLine == parseInt(locations[0] - 2)){
+
+					 osc.amp(0.5, 0.05);
+
+					 setTimeout(function(){
+
+					 	osc.amp(0, 0.05);
+
+					 }, 25);
+
+			}
+
 		}
+
+		
 
 
 	};

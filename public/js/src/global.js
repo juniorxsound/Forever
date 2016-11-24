@@ -20,3 +20,7 @@ var users;
 var id; 
 var userGeoPosition; 
 var serverGeo;
+var canvasLocations = [];
+var osc;
+var transportLine = 0;
+var cycleCounter = 0;
