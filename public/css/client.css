@@ -10,6 +10,7 @@ canvas{
 	z-index: 1 !important;
 }
 #interfaceDebug{
+	display: none;
 	position: absolute;
 	z-index: 100 !important;
 }

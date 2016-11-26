@@ -65,6 +65,16 @@
 
 		//Assign this data globally
 		serverGeo = geodata;
+
+		if(serverGeo != 0 && start === false){
+
+			setTimeout(function(){
+
+				start = true;
+
+			}, 1000);
+
+		}
 		
 		//Iterate over the amount of clients and map the values to canvas
 		for(var i = 0; i < Object.keys(geodata).length; i++){
@@ -76,7 +86,7 @@
 
 			canvasLocations.push([mappedX, mappedY]);
 
-			console.log(mappedX + ' ' + mappedY);
+			// console.log(mappedX + ' ' + mappedY);
 			
 		}
 
@@ -92,13 +102,17 @@
 		//Setting up a canvas
 		createCanvas(windowWidth, windowHeight);
 
-		//Setting up a test oscilator
-		  osc = new p5.Oscillator();
-		  osc.setType('sine');
-		  osc.freq(random(440, 880));
-		  osc.amp(0);
-		  osc.start();
+		//Setup envelope
+		env = new p5.Env();
+  		env.setADSR(0.5, 0.2, 0.1, 0.5);
 
+		//Setting up a test oscilator
+		osc = new p5.Oscillator();
+		freq = midiToFreq(pentatonicMin[0]);
+		osc.setType('sine');
+		osc.freq(freq);
+		osc.amp(env);
+		osc.start();
 	};
 
 
@@ -108,14 +122,17 @@
 		//Draw a white background
 		background(255);
 
-		//Transport courser increment
-		transportLine = transportLine + 0.3;
+		//Don't start before the server sends off gps data
+		if(start == true){
+			//Transport courser increment
+			transportLine = transportLine + 1;
+		}
 
 		//Courser
 		line(transportLine, height, transportLine, 0);
 
 		//Make it repeat and count cycles
-		if(transportLine == width){
+		if(Math.round(transportLine) == width){
 
 			transportLine = 0;
 
@@ -132,15 +149,22 @@
 			rect(locations[0], locations[1], 5, 5);
 
 			//If the courser reaches a user trigger the synth
-			if(transportLine == parseInt(locations[0] - 2)){
+			if(Math.round(transportLine) == Math.round(locations[0])){
 
-					 osc.amp(0.5, 0.05);
+					console.log('Note with the frequncey ' + freq + ' Hz played');
 
-					 setTimeout(function(){
+						//Trigger an oscilator hit and stop
+						env.play();
 
-					 	osc.amp(0, 0.05);
+						osc.amp(env, 0.05);
 
-					 }, 25);
+
+							//Set the oscilator note off
+							setTimeout(function(){
+
+							 	osc.amp(0, 0.05);
+
+							}, 1000);
 
 			}
 
@@ -154,7 +178,8 @@
 	//Never give up pushing the data!	
   	setInterval(function(){
 
-	  	var geodata = getGeoPosition(true, 'location');
+  		//1st Argument is wheter to appand the value to the DOM second is the div
+	  	var geodata = getGeoPosition(false, 'location');
 
   	}, 1000);
 </script>

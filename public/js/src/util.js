@@ -73,6 +73,12 @@ function getGeoPosition(print, div){
 
 }
 
-function readServerGeo(){
+function changeFreq(){
+
+  var selector = random(0, pentatonicMin.length);
+
+  freq = midiToFreq(pentatonicMin[selector]);
+
+  osc.freq(freq);
 
 }
