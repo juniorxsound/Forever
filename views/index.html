@@ -6,6 +6,8 @@
 		Forever - Alogirithmic Composition
 	</title>
 
+	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
 	<!--Scoket.io-->
 	<script src="js/lib/socket.io-1.4.5.js"></script>
 
@@ -24,6 +26,10 @@
 	<!-- Canvas and p5.js Utilities -->
 	<script type="js/src/canvas.js"></script>
 
+	<!-- Shit maps -->
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.css' rel='stylesheet' />
+
 	<!--Client Side CSS-->
 	<link rel="stylesheet" href="css/client.css">
 
@@ -36,6 +42,7 @@
 <div id="location"></div>
 <div id="error"></div>
 </div>
+<div id='map'></div>
 <script>
 
 	//Decale a new socket connection
@@ -90,6 +97,22 @@
 			
 		}
 
+		map.addSource('places', {
+		    type: 'geojson',
+		    data: stores
+  		});
+
+  		// Add a layer to the map with styling rules to render the source
+  		map.addLayer({
+		    id: 'locations',
+		    type: 'symbol',
+		    source: 'places',
+		    layout: {
+		      'icon-image': 'restaurant-15',
+		      'icon-allow-overlap': true
+		    }
+  		});
+
 
 	});
 
@@ -118,9 +141,10 @@
 
 
 	function draw(){
+		clear();
 
 		//Draw a white background
-		background(255);
+		// background(0,0,0,1);
 
 		//Don't start before the server sends off gps data
 		if(start == true){
@@ -182,6 +206,15 @@
 	  	var geodata = getGeoPosition(false, 'location');
 
   	}, 1000);
+
+  	mapboxgl.accessToken = 'pk.eyJ1IjoianVuaW9yeHNvdW5kIiwiYSI6ImNpdnlyMG9hZjAyamwydHRhNGRqZ3BhZGQifQ.hIDvif6XFSretP-RSqBtHQ';
+
+	var map = new mapboxgl.Map({
+    container: 'map', // container id
+    style: 'mapbox://styles/mapbox/streets-v9', //stylesheet location
+    center: [-77.034084, 38.909671],
+    zoom: 9 // starting zoom
+});
 </script>
 </body>
 </html>

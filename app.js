@@ -161,7 +161,7 @@ setInterval(function(){
 //Logs for data in the server
 	// console.log(usersCounter);
 	 // console.log(sockets);
-	 // console.log(geolocations);
+	  console.log(geolocations);
 	// console.log(usersCounter);
 
 	//If geolocations has geo data emit it to all users every second
