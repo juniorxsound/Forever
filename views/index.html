@@ -26,7 +26,7 @@
 	<!-- Canvas and p5.js Utilities -->
 	<script type="js/src/canvas.js"></script>
 
-	<!-- Shit maps -->
+	<!-- Mapbox maps -->
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.css' rel='stylesheet' />
 
@@ -42,8 +42,20 @@
 <div id="location"></div>
 <div id="error"></div>
 </div>
-<div id='map'></div>
+<div id="map" class="map mapboxgl-map"></div>
 <script>
+	window.onload = function(){
+
+		mapboxgl.accessToken = 'pk.eyJ1IjoianVuaW9yeHNvdW5kIiwiYSI6ImNpdnlyMG9hZjAyamwydHRhNGRqZ3BhZGQifQ.hIDvif6XFSretP-RSqBtHQ';
+
+		mapboxmap = new mapboxgl.Map({
+	    container: 'map', // container id
+	    style: 'mapbox://styles/mapbox/streets-v9', //stylesheet location
+	    center: [-73.034084, 41.909671],
+	    zoom: 9 // starting zoom
+		});
+
+	}
 
 	//Decale a new socket connection
 	socket = io();
@@ -97,13 +109,13 @@
 			
 		}
 
-		map.addSource('places', {
+		mapboxmap.addSource('places', {
 		    type: 'geojson',
 		    data: stores
   		});
 
   		// Add a layer to the map with styling rules to render the source
-  		map.addLayer({
+  		mapboxmap.addLayer({
 		    id: 'locations',
 		    type: 'symbol',
 		    source: 'places',
@@ -206,15 +218,6 @@
 	  	var geodata = getGeoPosition(false, 'location');
 
   	}, 1000);
-
-  	mapboxgl.accessToken = 'pk.eyJ1IjoianVuaW9yeHNvdW5kIiwiYSI6ImNpdnlyMG9hZjAyamwydHRhNGRqZ3BhZGQifQ.hIDvif6XFSretP-RSqBtHQ';
-
-	var map = new mapboxgl.Map({
-    container: 'map', // container id
-    style: 'mapbox://styles/mapbox/streets-v9', //stylesheet location
-    center: [-77.034084, 38.909671],
-    zoom: 9 // starting zoom
-});
 </script>
 </body>
 </html>
