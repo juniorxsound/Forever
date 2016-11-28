@@ -1,3 +1,5 @@
+'use strict'
+
 //////EXPRESS////////
 const express = require('express');
 const app = express();
@@ -41,7 +43,7 @@ io.on('connection', client=>{
 
 	//Players and conductors introduce yourself
 	client.on('introduction', who=>{
-		
+
 		userType = who;
 
 		if ( userType == 'conductor' ){
@@ -114,7 +116,7 @@ io.on('connection', client=>{
 					console.log('there are currently ' + usersCounter + ' player connected');
 
 				}
-			
+
 				userType == 'player';
 
 			} else if ( userType == 'conductor' ) {
@@ -172,5 +174,3 @@ setInterval(function(){
 	}
 
 }, 500);
-
-
