@@ -113,14 +113,14 @@
 			}, 1000);
 
 		}
-		
+
 		//Iterate over the amount of clients and map the values to canvas
 		for(var i = 0; i < Object.keys(geodata).length; i++){
 
 			var latlong = serverGeo[Object.keys(serverGeo)[i]];
 
-			var mappedY = map(latlong[0], 90, -90, 0, height);
-			var mappedX = map(latlong[1], -180, 180, 0, width);
+			var mappedY = map(latlong[0], 40, 30, 0, height);
+			var mappedX = map(latlong[1], -80, -70, 0, width);
 
 			canvasLocations.push([mappedX, mappedY]);
 
@@ -133,10 +133,10 @@
 			}
 
 			mapboxusers.features.push(userGeoJson);
-			
+
 		}
 
-		
+
 
 
 	});
@@ -187,7 +187,7 @@
 
 			cycleCounter++;
 
-		} 
+		}
 
 		//Iterate over the array that stores users pixel postions
 		for(var i = 0; i < canvasLocations.length; i++){
@@ -219,12 +219,12 @@
 
 		}
 
-		
+
 
 
 	};
 
-	//Never give up pushing the data!	
+	//Never give up pushing the data!
   	setInterval(function(){
 
   		//1st Argument is wheter to appand the value to the DOM second is the div
