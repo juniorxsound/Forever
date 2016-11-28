@@ -30,6 +30,11 @@ var frequncey;
 var env;
 var pentatonicMin = [62, 64, 65, 67, 69, 70, 72];
 var freq;
+var mapboxmap;
+var mapboxusers = {
+	"type": "FeatureCollection",
+	"features": []
+};
 var stores = {
     "type": "FeatureCollection",
     "features": [{
