@@ -157,20 +157,3 @@ function initMap(){
   });
 
 }
-
-function LatLongToPixelXY(latitude, longitude) {
-
-            var pi_180 = Math.PI / 180.0;
-
-            var pi_4 = Math.PI * 4;
-
-            var sinLatitude = Math.sin(latitude * pi_180);
-
-            var pixelY = Math.round((0.5 - Math.log((1 + sinLatitude) / (1 - sinLatitude)) / (pi_4)) * 512);
-
-            var pixelX = Math.round(((longitude + 180) / 360) * 512);
-
-            var pixel = { x: pixelX*-1, y: pixelY };
-
-            return pixel;
-}

@@ -38,3 +38,4 @@ var mapboxusers = {
 var mapboxmap;
 var gui;
 var guiParams;
+var bBox;
