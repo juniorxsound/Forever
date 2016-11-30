@@ -30,6 +30,9 @@
     <script src='js/lib/mapbox-gl.js'></script>
     <link href='js/lib/mapbox-gl.css' rel='stylesheet' />
 
+    <!-- Marcetor -->
+    <script src="js/lib/sphericalmercator.js"></script>
+
 	<!--Client Side CSS-->
 	<link rel="stylesheet" href="css/client.css">
 
@@ -47,6 +50,7 @@
 </div>
 <div id="map" class="map mapboxgl-map"></div>
 <script>
+
 		// DatGui Stuff
 		window.onload = function(){
 
@@ -54,13 +58,11 @@
 
 		  gui = new dat.GUI();
 
-		  var mapping = gui.addFolder('Mapping')
+		  var mapping = gui.addFolder('Mapping');
 
-		  mapping.add(guiParams, 'mapFromY', 40.000, 41.000);
-		  mapping.add(guiParams, 'mapToY', 41.000, 42.000);
+		  mapping.add(guiParams, 'Xscaler', 500, 2000);
 
-		  mapping.add(guiParams, 'mapFromX', 73.000, 74.000);
-		  mapping.add(guiParams, 'mapToX', 74.000, 75.000);
+		  mapping.add(guiParams, 'Yscaler', 500, 2000);
 
 		  var playback = gui.addFolder('Playback');
 
@@ -68,30 +70,9 @@
 
 		}
 		// Mapbox Setup
-		mapboxgl.accessToken = 'pk.eyJ1IjoianVuaW9yeHNvdW5kIiwiYSI6ImNpdnlyMG9hZjAyamwydHRhNGRqZ3BhZGQifQ.hIDvif6XFSretP-RSqBtHQ';
+		initMap();
 
-		mapboxmap = new mapboxgl.Map({
-	    container: 'map', // container id
-	    style: 'mapbox://styles/juniorxsound/ciw3v1jb300292jr1pf3y40c5', //stylesheet location
-	    center: [-73.98, 40.74278],
-	    zoom: 11.5 // starting zoom
-		});
-
-		mapboxmap.on('load', function () {
-	    window.setInterval(function() {
-	        mapboxmap.getSource('drone').setData(mapboxusers);
-	    }, 2000);
-
-	    mapboxmap.addSource('drone', { type: 'geojson', data: mapboxusers });
-	    mapboxmap.addLayer({
-	        "id": "drone",
-	        "type": "symbol",
-	        "source": "drone",
-	        "layout": {
-	            "icon-image": "rocket-15"
-	        }
-	    });
-	});
+		console.log(mapboxmap.getBounds());
 
 	//Decale a new socket connection
 	socket = io();
@@ -143,8 +124,15 @@
 
 			var latlong = serverGeo[Object.keys(serverGeo)[i]];
 
-			var mappedY = map(latlong[0], guiParams.mapFromY, 41.25, 0, height);
-			var mappedX = map(latlong[1], -73.2, -75, 0, width);
+			var projection = mapboxmap.project(latlong);
+
+			var mappedY = parseInt(projection.y / guiParams.Yscaler);
+			var mappedX = parseInt(projection.x / guiParams.Xscaler)
+
+			// var mappedY = map(latlong[0], 40.0, 41.22, 0, height);
+			// var mappedX = map(latlong[1], -73.47, -75, 0, width);
+
+
 
 			canvasLocations.push([mappedX, mappedY]);
 
@@ -158,6 +146,8 @@
 
 			mapboxusers.features.push(userGeoJson);
 
+
+
 		}
 
 
@@ -165,7 +155,7 @@
 
 	});
 
-	
+
 
 	function preload(){};
 
@@ -173,8 +163,6 @@
 
 		//Setting up a canvas
 		createCanvas(windowWidth, windowHeight);
-
-
 
 		//Setup envelope
 		env = new p5.Env();
@@ -184,7 +172,7 @@
 		osc = new p5.Oscillator();
 		freq = midiToFreq(pentatonicMin[0]);
 		osc.setType('sine');
-		osc.freq(freq);
+		osc.freq(440);
 		osc.amp(env);
 		osc.start();
 
@@ -226,22 +214,9 @@
 			rect(locations[0], locations[1], 5, 5);
 
 			//If the courser reaches a user trigger the synth
-			if(Math.round(transportLine) == Math.round(locations[0])){
+			if(parseInt(transportLine) == parseInt(locations[0])){
 
-					console.log('Note with the frequncey ' + freq + ' Hz played');
-
-						//Trigger an oscilator hit and stop
-						env.play();
-
-						osc.amp(env, 0.05);
-
-
-							//Set the oscilator note off
-							setTimeout(function(){
-
-							 	osc.amp(0, 0.05);
-
-							}, 1000);
+				playNote();
 
 			}
 
@@ -251,9 +226,15 @@
 
 	//Resize Canvas to Fit the Screen
 	window.onresize = function() {
-	  var w = window.innerWidth
+
+	  var w = window.innerWidth;
+
 	  var h = window.innerHeight
-	  resizeCanvas(w,h)
+
+	  resizeCanvas(w,h);
+
+	  console.log(mapboxmap.getBounds());
+
 	}
 
 	//Never give up pushing the data!

@@ -83,24 +83,94 @@ function changeFreq(){
 
 }
 
-function mercator(x, y) {
+function deg2rad(deg) {
+   var rad = deg * Math.PI/180;
+   return Math.tan(rad)
+}
 
-  return [x, Math.log(Math.tan(Math.PI / 4 + y / 2))];
+function mercator(lat) {
+
+  return Math.log(Math.tan(Math.PI / 4 + lat / 2));
 
 } 
 
 function initGuiParams() {
 
-  this.mapFromY = 40.0;
+  //Mapping
 
-  this.mapToY = 41.0;
-
-  this.mapFromX = 73.0;
-
-  this.mapToX = 74.0;
+  this.Xscaler = 1000;
+  this.Yscaler = 1000;
 
   //Playback
 
   this.playSpeed = 0.5;
 
 };
+
+function playNote(){
+
+
+
+            //Trigger an oscilator hit and stop
+            env.play();
+
+            osc.amp(env, 0.05);
+
+
+              //Set the oscilator note off
+              setTimeout(function(){
+
+                osc.amp(0, 0.05);
+
+              }, 1000);
+
+      console.log('Note with the frequncey ' + freq + ' Hz played');
+
+}
+
+function initMap(){
+
+    mapboxgl.accessToken = 'pk.eyJ1IjoianVuaW9yeHNvdW5kIiwiYSI6ImNpdnlyMG9hZjAyamwydHRhNGRqZ3BhZGQifQ.hIDvif6XFSretP-RSqBtHQ';
+
+    mapboxmap = new mapboxgl.Map({
+      container: 'map', // container id
+      style: 'mapbox://styles/juniorxsound/ciw3v1jb300292jr1pf3y40c5', //stylesheet location
+      center: [-73.98, 40.74278],
+      zoom: 11, // starting zoom
+      zoomControl: false
+    });
+
+    mapboxmap.on('load', function () {
+      window.setInterval(function() {
+          mapboxmap.getSource('drone').setData(mapboxusers);
+      }, 2000);
+
+      mapboxmap.addSource('drone', { type: 'geojson', data: mapboxusers });
+      mapboxmap.addLayer({
+          "id": "drone",
+          "type": "symbol",
+          "source": "drone",
+          "layout": {
+              "icon-image": "rocket-15"
+          }
+      });
+  });
+
+}
+
+function LatLongToPixelXY(latitude, longitude) {
+
+            var pi_180 = Math.PI / 180.0;
+
+            var pi_4 = Math.PI * 4;
+
+            var sinLatitude = Math.sin(latitude * pi_180);
+
+            var pixelY = Math.round((0.5 - Math.log((1 + sinLatitude) / (1 - sinLatitude)) / (pi_4)) * 512);
+
+            var pixelX = Math.round(((longitude + 180) / 360) * 512);
+
+            var pixel = { x: pixelX*-1, y: pixelY };
+
+            return pixel;
+}
