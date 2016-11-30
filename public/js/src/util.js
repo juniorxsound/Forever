@@ -82,3 +82,25 @@ function changeFreq(){
   osc.freq(freq);
 
 }
+
+function mercator(x, y) {
+
+  return [x, Math.log(Math.tan(Math.PI / 4 + y / 2))];
+
+} 
+
+function initGuiParams() {
+
+  this.mapFromY = 40.0;
+
+  this.mapToY = 41.0;
+
+  this.mapFromX = 73.0;
+
+  this.mapToX = 74.0;
+
+  //Playback
+
+  this.playSpeed = 0.5;
+
+};

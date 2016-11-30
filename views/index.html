@@ -27,11 +27,14 @@
 	<script type="js/src/canvas.js"></script>
 
 	<!-- Mapbox maps -->
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='js/lib/mapbox-gl.js'></script>
+    <link href='js/lib/mapbox-gl.css' rel='stylesheet' />
 
 	<!--Client Side CSS-->
 	<link rel="stylesheet" href="css/client.css">
+
+	<!-- Dat Gui for debugging -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
 
 </head>
 <body>
@@ -44,34 +47,52 @@
 </div>
 <div id="map" class="map mapboxgl-map"></div>
 <script>
+		// DatGui Stuff
+		window.onload = function(){
 
+		  guiParams = new initGuiParams();
+
+		  gui = new dat.GUI();
+
+		  var mapping = gui.addFolder('Mapping')
+
+		  mapping.add(guiParams, 'mapFromY', 40.000, 41.000);
+		  mapping.add(guiParams, 'mapToY', 41.000, 42.000);
+
+		  mapping.add(guiParams, 'mapFromX', 73.000, 74.000);
+		  mapping.add(guiParams, 'mapToX', 74.000, 75.000);
+
+		  var playback = gui.addFolder('Playback');
+
+		  playback.add(guiParams, 'playSpeed', 0, 3);
+
+		}
+		// Mapbox Setup
 		mapboxgl.accessToken = 'pk.eyJ1IjoianVuaW9yeHNvdW5kIiwiYSI6ImNpdnlyMG9hZjAyamwydHRhNGRqZ3BhZGQifQ.hIDvif6XFSretP-RSqBtHQ';
 
 		mapboxmap = new mapboxgl.Map({
 	    container: 'map', // container id
-	    style: 'mapbox://styles/mapbox/streets-v9', //stylesheet location
+	    style: 'mapbox://styles/juniorxsound/ciw3v1jb300292jr1pf3y40c5', //stylesheet location
 	    center: [-73.98, 40.74278],
 	    zoom: 11.5 // starting zoom
 		});
 
-  		var url = 'https://wanderdrone.appspot.com/';
-	mapboxmap.on('load', function () {
-    window.setInterval(function() {
-        mapboxmap.getSource('drone').setData(mapboxusers);
-    }, 2000);
+		mapboxmap.on('load', function () {
+	    window.setInterval(function() {
+	        mapboxmap.getSource('drone').setData(mapboxusers);
+	    }, 2000);
 
-    mapboxmap.addSource('drone', { type: 'geojson', data: mapboxusers });
-    mapboxmap.addLayer({
-        "id": "drone",
-        "type": "symbol",
-        "source": "drone",
-        "layout": {
-            "icon-image": "rocket-15"
-        }
-    });
-});
+	    mapboxmap.addSource('drone', { type: 'geojson', data: mapboxusers });
+	    mapboxmap.addLayer({
+	        "id": "drone",
+	        "type": "symbol",
+	        "source": "drone",
+	        "layout": {
+	            "icon-image": "rocket-15"
+	        }
+	    });
+	});
 
-	console.log(mapboxmap.getZoom());
 	//Decale a new socket connection
 	socket = io();
 
@@ -114,13 +135,16 @@
 
 		}
 
+		//Latitude is Y
+		//Longtitude is X
+
 		//Iterate over the amount of clients and map the values to canvas
 		for(var i = 0; i < Object.keys(geodata).length; i++){
 
 			var latlong = serverGeo[Object.keys(serverGeo)[i]];
 
-			var mappedY = map(latlong[0], 41, 40, 0, height);
-			var mappedX = map(latlong[1], -73, -74, 0, width);
+			var mappedY = map(latlong[0], guiParams.mapFromY, 41.25, 0, height);
+			var mappedX = map(latlong[1], -73.2, -75, 0, width);
 
 			canvasLocations.push([mappedX, mappedY]);
 
@@ -141,7 +165,7 @@
 
 	});
 
-
+	
 
 	function preload(){};
 
@@ -149,6 +173,8 @@
 
 		//Setting up a canvas
 		createCanvas(windowWidth, windowHeight);
+
+
 
 		//Setup envelope
 		env = new p5.Env();
@@ -161,6 +187,7 @@
 		osc.freq(freq);
 		osc.amp(env);
 		osc.start();
+
 	};
 
 
@@ -174,14 +201,15 @@
 		//Don't start before the server sends off gps data
 		if(start == true){
 			//Transport courser increment
-			transportLine = transportLine + 1;
+			transportLine = transportLine + guiParams.playSpeed;
 		}
 
 		//Courser
+		stroke(255, 255, 255);
 		line(transportLine, height, transportLine, 0);
 
 		//Make it repeat and count cycles
-		if(Math.round(transportLine) == width){
+		if(parseInt(transportLine) == width){
 
 			transportLine = 0;
 
@@ -219,10 +247,14 @@
 
 		}
 
-
-
-
 	};
+
+	//Resize Canvas to Fit the Screen
+	window.onresize = function() {
+	  var w = window.innerWidth
+	  var h = window.innerHeight
+	  resizeCanvas(w,h)
+	}
 
 	//Never give up pushing the data!
   	setInterval(function(){
