@@ -14,9 +14,6 @@ Forever - Algorithmic Composition - Client side Util lib
 Wrriten by juniorxsound (http://phenomenalabs.com)
 */
 
-//Global Variables
-var socket, users, id, userGeoPosition, serverGeo;
-
 function introduction(socket, who){
 
 	if(who == 'player'){
@@ -102,29 +99,16 @@ function initGuiParams() {
   this.Yscaler = 1000;
 
   //Playback
-
   this.playSpeed = 0.5;
 
-};
-
-function playNote(){
-
-
-
-            //Trigger an oscilator hit and stop
-            env.play();
-
-            osc.amp(env, 0.05);
-
-
-              //Set the oscilator note off
-              setTimeout(function(){
-
-                osc.amp(0, 0.05);
-
-              }, 1000);
-
-      console.log('Note with the frequncey ' + freq + ' Hz played');
+  //P5 ADDONS
+  this.p5add = function(){
+    if(p5Addons === true){
+      p5Addons = false;
+    } else {
+      p5Addons = true;
+    }
+  }
 
 }
 
@@ -156,4 +140,17 @@ function initMap(){
       });
   });
 
+}
+
+function initOscilators(){
+    osc = new p5.Oscillator();
+    osc.setType('sine');
+    osc.freq(frequency);
+    osc.amp(0.5);
+    osc.start();
+}
+function changeNote(){
+    osc.stop();
+    osc.freq(frequency);
+    osc.start();
 }

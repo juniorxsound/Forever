@@ -26,7 +26,7 @@ var osc;
 var transportLine = 0;
 var cycleCounter = 0;
 var start = false;
-var frequncey;
+var frequency = 440;
 var env;
 var pentatonicMin = [62, 64, 65, 67, 69, 70, 72];
 var freq;
@@ -35,7 +35,6 @@ var mapboxusers = {
 	"type": "FeatureCollection",
 	"features": []
 };
-var mapboxmap;
-var gui;
 var guiParams;
 var bBox;
+var p5Addons = false;

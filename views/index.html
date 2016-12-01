@@ -60,7 +60,9 @@ var merc = new SphericalMercator({
 
 		  guiParams = new initGuiParams();
 
-		  gui = new dat.GUI();
+		  var gui = new dat.GUI();
+
+		  gui.add(guiParams, 'p5add');
 
 		  var mapping = gui.addFolder('Mapping');
 
@@ -120,30 +122,20 @@ var merc = new SphericalMercator({
 
 		}
 
-		//Latitude is Y
-		//Longtitude is X
-
 		//Iterate over the amount of clients and map the values to canvas
 		for(var i = 0; i < Object.keys(geodata).length; i++){
 
 			var latlong = serverGeo[Object.keys(serverGeo)[i]];
 
-			//Get the bounding box
-			// var bounding = [bBox._sw.lat, bBox._ne.lat]
-
-			// var projection = merc.xyz();
-
-			// console.log(projection);
-
-			// var mappedY = projection[0];
-			// var mappedX = projection[1];
-
-			var mappedY = map(latlong[0], 40.63878188068054, 
-40.84661576176842, height, 0);
-			var mappedX = map(latlong[1], -74.16299102783208, -73.79700897216797, 0, width);
-
+			//Map the boundbox LatLong to pixel space
+			var mappedY = map(latlong[0], bBox._sw.lat, 
+bBox._ne.lat, height, 0);
+			var mappedX = map(latlong[1], bBox._sw.lng, bBox._ne.lng, 0, width);
+			
+			//Store user pixel location for p5
 			canvasLocations.push([mappedX, mappedY]);
 
+			//Store user location for MapBox
 			var userGeoJson = {
 				"type": "Feature",
 				"geometry": {
@@ -152,14 +144,10 @@ var merc = new SphericalMercator({
       			}
 			}
 
+			//Add mapbox users
 			mapboxusers.features.push(userGeoJson);
 
-
-
 		}
-
-
-
 
 	});
 
@@ -172,17 +160,7 @@ var merc = new SphericalMercator({
 		//Setting up a canvas
 		createCanvas(windowWidth, windowHeight);
 
-		//Setup envelope
-		env = new p5.Env();
-  		env.setADSR(0.5, 0.2, 0.1, 0.5);
-
-		//Setting up a test oscilator
-		osc = new p5.Oscillator();
-		freq = midiToFreq(pentatonicMin[0]);
-		osc.setType('sine');
-		osc.freq(440);
-		osc.amp(env);
-		osc.start();
+		initOscilators();
 
 	};
 
@@ -190,9 +168,6 @@ var merc = new SphericalMercator({
 
 	function draw(){
 		clear();
-
-		//Draw a white background
-		// background(0,0,0,1);
 
 		//Don't start before the server sends off gps data
 		if(start == true){
@@ -218,14 +193,19 @@ var merc = new SphericalMercator({
 
 			var locations = canvasLocations[i];
 
-			//Draw a rect for each user
-			rect(locations[0], locations[1], 5, 5);
+			//DatGui control for addons
+			if(p5Addons === true){
+
+				//Draw a rect for each user
+				rect(locations[0], locations[1], 5, 5);
+
+			}
 
 			//If the courser reaches a user trigger the synth
 			if(parseInt(transportLine) == parseInt(locations[0])){
+				// frequency += 440;
 
-				playNote();
-
+				// changeNote();
 			}
 
 		}
@@ -241,6 +221,7 @@ var merc = new SphericalMercator({
 
 	  resizeCanvas(w,h);
 
+	  //Get the new bounding box for the map
 	  bBox = mapboxmap.getBounds();
 
 	}
