@@ -138,8 +138,9 @@ var merc = new SphericalMercator({
 			// var mappedY = projection[0];
 			// var mappedX = projection[1];
 
-			var mappedY = map(latlong[0], 40.0, 41.22, 0, height);
-			var mappedX = map(latlong[1], -73.47, -75, 0, width);
+			var mappedY = map(latlong[0], 40.63878188068054, 
+40.84661576176842, height, 0);
+			var mappedX = map(latlong[1], -74.16299102783208, -73.79700897216797, 0, width);
 
 			canvasLocations.push([mappedX, mappedY]);
 
@@ -218,7 +219,7 @@ var merc = new SphericalMercator({
 			var locations = canvasLocations[i];
 
 			//Draw a rect for each user
-			// rect(locations[0], locations[1], 5, 5);
+			rect(locations[0], locations[1], 5, 5);
 
 			//If the courser reaches a user trigger the synth
 			if(parseInt(transportLine) == parseInt(locations[0])){
