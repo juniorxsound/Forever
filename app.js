@@ -116,6 +116,7 @@ io.on('connection', client=>{
 
 				//Another one bites to dust
 				usersCounter = Object.keys(sockets).length;
+
 				if( usersCounter == 0 ){
 					console.log('A player disconnected');
 					console.log('There are currently no players connected');
@@ -172,11 +173,10 @@ app.get('/*', (req, res) => {
 setInterval(function(){
 //Logs for data in the server
 	// console.log(usersCounter);
-	 // console.log(sockets);
+	// console.log(sockets);
 	// console.log(geolocations);
-	// console.log(usersCounter);
 
-	//If geolocations has geo data emit it to all users every second
+	//If geolocations has geodata emit it to all users every half second
 	if(Object.keys(geolocations) != 0 ){
 
 		io.sockets.emit('serverGeoData', geolocations);

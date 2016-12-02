@@ -38,14 +38,14 @@ function introduction(socket, who){
 
 function userCounter(print, count, div){
 
+  console.log('There are currently ' + count + ' users connected');
+
   if( print === true ){
 
       users = count;
 
   		//Get the users paragraph and print the user to it
   		document.getElementById(div).innerHTML = count;
-
-  		console.log('There are currently ' + count + ' users connected');
 
   }
 
