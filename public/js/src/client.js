@@ -160,7 +160,7 @@ bBox._ne.lat, height, 0);
 			}
 
 			//If the courser reaches a user trigger the synth
-			if(Math.round(transportLine) == Math.round(locations[0])){
+			if(parseInt(transportLine) == Math.floor(locations[0])){
 
 				//Make sure to change the frequncy
 				// changeNote();
