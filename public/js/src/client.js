@@ -66,20 +66,17 @@ Wrriten by juniorxsound (http://phenomenalabs.com)
 
 		mapboxusers.features = [];
 
-		//Log the data for debugging
-		// console.log(geodata);
-
 		//Assign this data globally
 		serverGeo = geodata;
 
-		//Dont start the transport before data has arrived!
+		//Dont start the transport before data has arrived and wait a little just to be safe
 		if(serverGeo != 0 && start === false){
 
 			setTimeout(function(){
 
 				start = true;
 
-			}, 1000);
+			}, 2000);
 
 		}
 
