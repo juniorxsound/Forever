@@ -203,13 +203,13 @@ function hitNote(){
 
     //Iterate over all the users pixel position to determine note height
     for(var i = 0; i < canvasLocations.length; i++){
-      
+
       var xy = canvasLocations[i];
 
       //Only console log the Y position of the current note
       if(parseInt(transportLine) == parseInt(xy[0])){
 
-        console.log(xy[1]);
+        console.log(parseIn(xy[1]));
 
       }
 
@@ -219,7 +219,7 @@ function hitNote(){
 
     var frequenci = pentaFreq[selector];
 
-    osc.freq(frequenci, 1);
+    osc.freq(frequenci, 0.5);
 
     env.play();
 
