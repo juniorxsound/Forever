@@ -201,6 +201,30 @@ function initOscilator(){
 
 function hitNote(){
 
+    for(var i = 0; i < canvasLocations.length; i++){
+
+      var xy = canvasLocations[i];
+
+      if(xy[1] <= width/pentatonicMin.length) {
+        console.log("it's in the first zone");
+      } else if (xy[1] <= height/pentatonicMin.length + width/pentatonicMin.length){
+        console.log("it's in the second zone");
+      } else if (xy[1] <= height/pentatonicMin.length + width/pentatonicMin.length*2){
+        console.log("it's in the third zone");
+      } else if (xy[1] <= height/pentatonicMin.length + width/pentatonicMin.length*3){
+        console.log("it's in the fourth zone");
+      } else if (xy[1] <= height/pentatonicMin.length + width/pentatonicMin.length*4){
+        console.log("it's in the fifth zone");
+      } else if (xy[1] <= height/pentatonicMin.length + width/pentatonicMin.length*6){
+        console.log("it's in the sixth zone");
+      }else if (xy[1] <= height/pentatonicMin.length + width/pentatonicMin.length*3){
+        console.log("it's in the seventh zone");
+      } else {
+        console.log("someother zone");
+      }
+
+    }
+
     selector = round(random(0,20))
 
     var frequenci = pentaFreq[selector];
