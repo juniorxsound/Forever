@@ -205,9 +205,9 @@ function hitNote(){
 
     var frequenci = pentaFreq[selector];
 
-    env.play();
+    osc.freq(frequenci, 1);
 
-    osc.freq(frequenci, 2);
+    env.play();
 
     console.log('The note ' + pentatonicMin[selector] + ' was played');
 
