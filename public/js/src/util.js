@@ -30,20 +30,24 @@ function introduction(socket, who){
 
  	} else {
 
- 		console.log('Error, user type not defined');
+ 		console.log('Error, user type not defined you are not connected to the server');
 
  	}
 
 }
 
-function userCounter(count, div){
+function userCounter(print, count, div){
 
-    users = count;
+  if( print === true ){
 
-		//Get the users paragraph and print the user to it
-		document.getElementById(div).innerHTML = count;
+      users = count;
 
-		console.log('There are currently ' + count + ' users connected');
+  		//Get the users paragraph and print the user to it
+  		document.getElementById(div).innerHTML = count;
+
+  		console.log('There are currently ' + count + ' users connected');
+
+  }
 
 }
 
@@ -81,8 +85,11 @@ function changeFreq(){
 }
 
 function deg2rad(deg) {
+
    var rad = deg * Math.PI/180;
-   return Math.tan(rad)
+
+   return Math.tan(rad);
+
 }
 
 function mercator(lat) {
@@ -94,7 +101,6 @@ function mercator(lat) {
 function initGuiParams() {
 
   //Mapping
-
   this.Xscaler = 1000;
   this.Yscaler = 1000;
 
@@ -113,9 +119,10 @@ function initGuiParams() {
 }
 
 function initMap(){
-
+    //Mapbox API token
     mapboxgl.accessToken = 'pk.eyJ1IjoianVuaW9yeHNvdW5kIiwiYSI6ImNpdnlyMG9hZjAyamwydHRhNGRqZ3BhZGQifQ.hIDvif6XFSretP-RSqBtHQ';
 
+    //Create a new map object
     mapboxmap = new mapboxgl.Map({
       container: 'map', // container id
       style: 'mapbox://styles/juniorxsound/ciw3v1jb300292jr1pf3y40c5', //stylesheet location
@@ -124,11 +131,13 @@ function initMap(){
       zoomControl: false
     });
 
+    //Setup event listeners and invterval to refetch the users
     mapboxmap.on('load', function () {
       window.setInterval(function() {
           mapboxmap.getSource('drone').setData(mapboxusers);
       }, 2000);
 
+      //Add the users layer to the map
       mapboxmap.addSource('drone', { type: 'geojson', data: mapboxusers });
       mapboxmap.addLayer({
           "id": "drone",
@@ -142,15 +151,51 @@ function initMap(){
 
 }
 
-function initOscilators(){
-    osc = new p5.Oscillator();
-    osc.setType('sine');
-    osc.freq(frequency);
-    osc.amp(0.5);
+function initOscilator(){
+
+    pentaFreq = [];
+
+    for(var i = 0; i < pentatonicMin.length; i++){
+
+      pentaFreq.push(midiToFreq(pentatonicMin[i]));
+      
+    }
+
+    var attackLevel = 1.0;
+    var releaseLevel = 0;
+
+    var attackTime = 3.0;
+    var decayTime = 0.5;
+    var susPercent = 0.2;
+    var releaseTime = 5.0;
+
+    env = new p5.Env();
+
+    env.setADSR(attackTime, decayTime, susPercent, releaseTime);
+    env.setRange(attackLevel, releaseLevel);
+
+    osc = new p5.Oscillator('triangle');
+    osc.amp(env);
     osc.start();
+
 }
+
+function hitNote(){
+
+    env.play();
+
+}
+
 function changeNote(){
+
+    var frequenci = pentaFreq[round(random(0,6))];
+
+    console.log(frequenci);
+
     osc.stop();
-    osc.freq(frequency);
+
+    osc.freq(frequenci);
+
     osc.start();
+
 }
