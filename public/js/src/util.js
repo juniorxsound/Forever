@@ -201,22 +201,14 @@ function initOscilator(){
 
 function hitNote(){
 
-    env.play();
-
-    console.log('The note ' + pentatonicMin[selector] + ' was played');
-
-}
-
-function changeNote(){
-
     selector = round(random(0,20))
 
     var frequenci = pentaFreq[selector];
 
-    osc.stop();
+    env.play();
 
-    osc.freq(frequenci, 4);
+    osc.freq(frequenci, 2);
 
-    osc.start();
+    console.log('The note ' + pentatonicMin[selector] + ' was played');
 
 }
