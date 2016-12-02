@@ -116,6 +116,13 @@ function initGuiParams() {
     }
   }
 
+    //Add fake users
+  this.addUser = function(){
+    
+    socket.emit('addUser', 'makefakeuserplease');
+
+  }
+
 }
 
 function initMap(){
@@ -169,13 +176,25 @@ function initOscilator(){
     var susPercent = 0.2;
     var releaseTime = 5.0;
 
+    reverb = new p5.Reverb();
+    reverb.set(3, 500, true);
+
     env = new p5.Env();
+
+    env.disconnect(); // so we'll only hear reverb...
+
+    // connect soundFile to reverb, process w/
+    // 3 second reverbTime, decayRate of 2%
+    reverb.process(env, 4, 5);
+
+    // env.connect(reverb);
 
     env.setADSR(attackTime, decayTime, susPercent, releaseTime);
     env.setRange(attackLevel, releaseLevel);
 
     osc = new p5.Oscillator('sine');
     osc.amp(env);
+    // osc.connect(reverb);
     osc.start();
 
 }
@@ -184,13 +203,15 @@ function hitNote(){
 
     env.play();
 
+    console.log('The note ' + pentatonicMin[selector] + ' was played');
+
 }
 
 function changeNote(){
 
-    var frequenci = pentaFreq[round(random(0,20))];
+    selector = round(random(0,20))
 
-    console.log(frequenci);
+    var frequenci = pentaFreq[selector];
 
     osc.stop();
 

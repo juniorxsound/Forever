@@ -23,6 +23,8 @@ Wrriten by juniorxsound (http://phenomenalabs.com)
 
 		  gui.add(guiParams, 'p5add');
 
+		  gui.add(guiParams, 'addUser');
+
 		  var mapping = gui.addFolder('Mapping');
 
 		  mapping.add(guiParams, 'Xscaler', 500, 2000);
@@ -31,7 +33,7 @@ Wrriten by juniorxsound (http://phenomenalabs.com)
 
 		  var playback = gui.addFolder('Playback');
 
-		  playback.add(guiParams, 'playSpeed', 0, 3);
+		  playback.add(guiParams, 'playSpeed', 0, 10);
 
 		}
 		// Mapbox Setup
@@ -163,11 +165,12 @@ bBox._ne.lat, height, 0);
 			//If the courser reaches a user trigger the synth
 			if(parseInt(transportLine) == parseInt(locations[0])){
 
+				//Make sure to change the frequncy
 				changeNote();
 				
+				//"Oops I did it again..."
 				hitNote();
 
-				console.log('note hit');
 			}
 
 		}

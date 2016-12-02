@@ -20,6 +20,7 @@ var users;
 var id; 
 var userGeoPosition; 
 var serverGeo;
+var selector;
 var canvasLocations = [];
 var locations;
 var osc;
@@ -31,6 +32,7 @@ var pentaFreq;
 var env;
 var pentatonicMin = [40, 42, 44, 45, 47, 49, 50, 52, 54, 55, 56, 57, 59, 60, 62, 64, 65, 67, 69, 70, 72];
 var freq;
+var reverb;
 var mapboxmap;
 var mapboxusers = {
 	"type": "FeatureCollection",
@@ -39,3 +41,11 @@ var mapboxusers = {
 var guiParams;
 var bBox;
 var p5Addons = false;
+
+
+
+
+
+
+
+
