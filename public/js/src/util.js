@@ -209,7 +209,7 @@ function hitNote(){
       //Only console log the Y position of the current note
       if(parseInt(transportLine) == parseInt(xy[0])){
 
-        console.log(parseIn(xy[1]));
+        console.log(Math.round(xy[1]));
 
       }
 
