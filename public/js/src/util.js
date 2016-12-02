@@ -201,26 +201,16 @@ function initOscilator(){
 
 function hitNote(){
 
+    //Iterate over all the users pixel position to determine note height
     for(var i = 0; i < canvasLocations.length; i++){
-
+      
       var xy = canvasLocations[i];
 
-      if(xy[1] <= height/7) {
-        console.log("it's in the first zone");
-      } else if (xy[1] <= height/7 + 1){
-        console.log("it's in the second zone");
-      } else if (xy[1] <= height/7 + 2){
-        console.log("it's in the third zone");
-      } else if (xy[1] <= height/7 + 3){
-        console.log("it's in the fourth zone");
-      } else if (xy[1] <= height/7 + 4){
-        console.log("it's in the fifth zone");
-      } else if (xy[1] <= height/7 + 5){
-        console.log("it's in the sixth zone");
-      }else if (xy[1] <= height/7 + 6){
-        console.log("it's in the seventh zone");
-      } else {
-        console.log("someother zone");
+      //Only console log the Y position of the current note
+      if(parseInt(transportLine) == parseInt(xy[0])){
+
+        console.log(xy[1]);
+
       }
 
     }
