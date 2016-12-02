@@ -215,7 +215,7 @@ function changeNote(){
 
     osc.stop();
 
-    osc.freq(frequenci);
+    osc.freq(frequenci, 2);
 
     osc.start();
 

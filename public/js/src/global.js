@@ -23,7 +23,7 @@ var serverGeo;
 var selector;
 var canvasLocations = [];
 var locations;
-var osc;
+var osc = {};
 var transportLine = 0;
 var cycleCounter = 0;
 var start = false;
