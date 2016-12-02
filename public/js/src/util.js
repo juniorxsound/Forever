@@ -68,7 +68,7 @@ function getGeoPosition(print, div){
 
 	} else {
 
-	    document.getElementById('error').innerHTML = "Oops Sorry, your device doesn't support Geo position"
+	    document.getElementById('error').innerHTML = "Oops, Sorry but it seems your browser doesn't support Geo location, download Chrome?"
 
 	}
 

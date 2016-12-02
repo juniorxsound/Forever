@@ -64,7 +64,7 @@ io.on('connection', client=>{
 
 		if ( userType == 'conductor' ){
 
-			//Conductor connected log
+			//Conductor connected log to server
 			console.log('A conductor connected');
 
 		} else if ( userType == 'player' ){
