@@ -174,7 +174,7 @@ function initOscilator(){
     env.setADSR(attackTime, decayTime, susPercent, releaseTime);
     env.setRange(attackLevel, releaseLevel);
 
-    osc = new p5.Oscillator('triangle');
+    osc = new p5.Oscillator('sine');
     osc.amp(env);
     osc.start();
 
@@ -188,7 +188,7 @@ function hitNote(){
 
 function changeNote(){
 
-    var frequenci = pentaFreq[round(random(0,6))];
+    var frequenci = pentaFreq[round(random(0,20))];
 
     console.log(frequenci);
 
