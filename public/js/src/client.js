@@ -180,7 +180,12 @@ bBox._ne.lat, height, 0);
 
 	function touchStarted(){
 
-		transportLine = transportLine;
+	//Clamp the selection area to 200px around the transport line
+		if(touchX <= transportLine + 100 && touchX >= transportLine - 100){
+
+			transportLine = transportLine;
+
+		}
 
 		// prevent default
 		return false;
@@ -189,11 +194,12 @@ bBox._ne.lat, height, 0);
 
 	function touchMoved() {
 
-		// if(touchX >= transportLine + 50 && touchX <= transportLine - 50){
+		//Clamp the selection area to 200px around the transport line
+		if(touchX <= transportLine + 100 && touchX >= transportLine - 100){
 
 			transportLine = touchX;
 
-		// }
+		}
 
 		  // prevent default
 		  return false;
