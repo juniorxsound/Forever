@@ -35,6 +35,14 @@ Wrriten by juniorxsound (http://phenomenalabs.com)
 
 		  playback.add(guiParams, 'playSpeed', 0, 10);
 
+		  var oscil = gui.addFolder('Oscilator');
+
+		  oscil.add(guiParams, 'AttackTime', 0.1, 5);
+
+		  oscil.add(guiParams, 'DecayTime', 0.1, 5);
+
+		  oscil.add(guiParams, 'ReleaseTime', 0.1, 5);
+
 		}
 		// Mapbox Setup
 		initMap();

@@ -116,6 +116,11 @@ function initGuiParams() {
     }
   }
 
+  //Oscilator params
+  this.AttackTime = 0.1;
+  this.DecayTime = 0.5;
+  this.ReleaseTime = 0.1;
+
     //Add fake users
   this.addUser = function(){
     
@@ -171,10 +176,10 @@ function initOscilator(){
     var attackLevel = 1.0;
     var releaseLevel = 0;
 
-    var attackTime = 3.0;
-    var decayTime = 0.5;
+    var attackTime = guiParams.AttackTime;
+    var decayTime = guiParams.DecayTime;
     var susPercent = 0.2;
-    var releaseTime = 5.0;
+    var releaseTime = guiParams.ReleaseTime;
 
     reverb = new p5.Reverb();
     reverb.set(3, 500, true);
