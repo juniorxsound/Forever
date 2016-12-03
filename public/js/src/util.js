@@ -209,10 +209,16 @@ function hitNote(){
       //Only console log the Y position of the current note
       if(parseInt(transportLine) == parseInt(xy[0])){
 
-      if(xy[1] > 0 && xy[1] < height/2){
+      if(xy[1] > 0 && xy[1] < height/5){
         console.log('1st Area');
-      } else if (xy[1] > height/2 && xy[1] < height){
+      } else if (xy[1] > height/5 && xy[1] < (height/5)*2){
         console.log('2nd Area');
+      } else if (xy[1] > (height/5)*2 && xy[1] < (height/5)*3){
+        console.log('3rd Area');
+      } else if (xy[1] > (height/5)*3 && xy[1] < (height/5)*4){
+        console.log('4th Area');
+      } else if (xy[1] > (height/5)*4 && xy[1] < height){
+        console.log('5th Area');
       }
 
         // console.log(Math.round(xy[1]));
