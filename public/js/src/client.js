@@ -163,7 +163,7 @@ bBox._ne.lat, height, 0);
 			if(parseInt(transportLine) == Math.floor(locations[0])){
 
 				//Make sure to change the frequncy
-				// changeNote();
+				changeNote();
 				
 				//"Oops I did it again..."
 				hitNote();
