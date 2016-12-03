@@ -209,7 +209,13 @@ function hitNote(){
       //Only console log the Y position of the current note
       if(parseInt(transportLine) == parseInt(xy[0])){
 
-        console.log(Math.round(xy[1]));
+      for(var j = 0; j < height/pentatonicMin.length; j++){
+
+          console.log(j + 'area');
+
+      }
+
+        // console.log(Math.round(xy[1]));
 
       }
 
