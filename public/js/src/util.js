@@ -211,46 +211,54 @@ function hitNote(){
       //Only console log the Y position of the current note
       if(parseInt(transportLine) == parseInt(xy[0])){
 
-      if(xy[1] > 0 && xy[1] < height/5){
-        console.log('1st Area');
+          if(xy[1] > 0 && xy[1] < height/5){
+            console.log('1st Area');
 
-        frequenci = pentaFreq[random(12, 14)];
+            frequenci = pentaFreq[random(12, 14)];
 
-
-      } else if (xy[1] > height/5 && xy[1] < (height/5)*2){
-        console.log('2nd Area');
-
-        frequenci = pentaFreq[random(9, 11)];
-
-      } else if (xy[1] > (height/5)*2 && xy[1] < (height/5)*3){
-        console.log('3rd Area');
-
-        frequenci = pentaFreq[random(6, 8)];
+            osc.freq(frequenci, 0.1);
 
 
-      } else if (xy[1] > (height/5)*3 && xy[1] < (height/5)*4){
-        console.log('4th Area');
+          } else if (xy[1] > height/5 && xy[1] < (height/5)*2){
+            console.log('2nd Area');
 
-        frequenci = pentaFreq[random(3, 5)];
+            frequenci = pentaFreq[random(9, 11)];
+
+            osc.freq(frequenci, 0.1);
+
+          } else if (xy[1] > (height/5)*2 && xy[1] < (height/5)*3){
+            console.log('3rd Area');
+
+            frequenci = pentaFreq[random(6, 8)];
+
+            osc.freq(frequenci, 0.1);
 
 
-      } else if (xy[1] > (height/5)*4 && xy[1] < height){
-        console.log('5th Area');
+          } else if (xy[1] > (height/5)*3 && xy[1] < (height/5)*4){
+            console.log('4th Area');
 
-        frequenci = pentaFreq[random(0, 2)];
+            frequenci = pentaFreq[random(3, 5)];
+
+            osc.freq(frequenci, 0.1);
 
 
-      } else {
-        console.log('You are currently not in the map, sorry');
-      }
+          } else if (xy[1] > (height/5)*4 && xy[1] < height){
+            console.log('5th Area');
 
-        // console.log(Math.round(xy[1]));
+            frequenci = pentaFreq[random(0, 2)];
+
+            osc.freq(frequenci, 0.1);
+
+
+          } else {
+            console.log('You are currently not in the map, sorry');
+          }
+
+            // console.log(Math.round(xy[1]));
 
       }
 
     }
-
-    osc.freq(frequenci, 0.1);
 
     env.play();
 
