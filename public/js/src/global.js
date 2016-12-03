@@ -30,7 +30,7 @@ var start = false;
 var frequency;
 var pentaFreq;
 var env;
-var pentatonicMin = [50, 53, 55, 57, 59, 60, 63, 65, 67, 69, 70, 73, 75, 77, 79];
+var pentatonicMin = [70, 73, 75, 77, 79, 80, 83, 85, 87, 89, 90, 93, 95, 97, 99];
 var freq;
 var reverb;
 var mapboxmap;

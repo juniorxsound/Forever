@@ -214,7 +214,7 @@ function changeNote(){
 
             frequenci = pentaFreq[round(random(12, 14))];
 
-            osc.freq(frequenci, 0.5);
+            osc.freq(frequenci, 0.01);
 
 
           } else if (xy[1] > height/5 && xy[1] < (height/5)*2){
@@ -222,14 +222,14 @@ function changeNote(){
 
             frequenci = pentaFreq[round(random(9, 11))];
 
-            osc.freq(frequenci, 0.5);
+            osc.freq(frequenci, 0.01);
 
           } else if (xy[1] > (height/5)*2 && xy[1] < (height/5)*3){
             console.log('3rd Area');
 
             frequenci = pentaFreq[round(random(6, 8))];
 
-            osc.freq(frequenci, 0.5);
+            osc.freq(frequenci, 0.01);
 
 
           } else if (xy[1] > (height/5)*3 && xy[1] < (height/5)*4){
@@ -237,7 +237,7 @@ function changeNote(){
 
             frequenci = pentaFreq[round(random(3, 5))];
 
-            osc.freq(frequenci, 0.5);
+            osc.freq(frequenci, 0.01);
 
 
           } else if (xy[1] > (height/5)*4 && xy[1] < height){
@@ -245,7 +245,7 @@ function changeNote(){
 
             frequenci = pentaFreq[round(random(0, 2))];
 
-            osc.freq(frequenci, 0.5);
+            osc.freq(frequenci, 0.01);
 
 
           } else {
