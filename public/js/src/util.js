@@ -209,10 +209,10 @@ function hitNote(){
       //Only console log the Y position of the current note
       if(parseInt(transportLine) == parseInt(xy[0])){
 
-      for(var j = 0; j < height/pentatonicMin.length; j++){
-
-          console.log(j + 'area');
-
+      if(xy[1] > 0 && xy[1] < height/2){
+        console.log('1st Area');
+      } else if (xy[1] > height/2 && xy[1] < height){
+        console.log('2nd Area');
       }
 
         // console.log(Math.round(xy[1]));
