@@ -209,9 +209,9 @@ function changeNote(){
     var frequenci = 0;
 
     //Iterate over all the users pixel position to determine note height
-    for(var i = 0; i < canvasLocations.length; i++){
+    for(var z = 0; z < canvasLocations.length; z++){
 
-      var xy = canvasLocations[i];
+      var xy = canvasLocations[z];
 
       //Only console log the Y position of the current note
       if(parseInt(transportLine) == parseInt(xy[0])){
