@@ -248,7 +248,7 @@ function hitNote(){
 
     }
 
-    osc.freq(frequenci, 0.5);
+    osc.freq(frequenci, 0.1);
 
     env.play();
 
