@@ -107,22 +107,27 @@ function initGuiParams() {
   //Playback
   this.playSpeed = 0.5;
 
-  //P5 ADDONS
-  this.p5add = function(){
-    if(p5Addons === true){
-      p5Addons = false;
-    } else {
-      p5Addons = true;
+}
+
+function initGui(){
+      // DatGui Stuff
+    window.onload = function(){
+
+      guiParams = new initGuiParams();
+
+      var gui = new dat.GUI();
+
+      var mapping = gui.addFolder('Mapping');
+
+      mapping.add(guiParams, 'Xscaler', 500, 2000);
+
+      mapping.add(guiParams, 'Yscaler', 500, 2000);
+
+      var playback = gui.addFolder('Playback');
+
+      playback.add(guiParams, 'playSpeed', 0, 10);
+
     }
-  }
-
-    //Add fake users
-  this.addUser = function(){
-    
-    socket.emit('addUser', 'makefakeuserplease');
-
-  }
-
 }
 
 function initMap(){
@@ -146,14 +151,16 @@ function initMap(){
 
       //Add the users layer to the map
       mapboxmap.addSource('drone', { type: 'geojson', data: mapboxusers });
-      mapboxmap.addLayer({
-          "id": "drone",
-          "type": "symbol",
-          "source": "drone",
-          "layout": {
-              "icon-image": "rocket-15"
-          }
-      });
+
+      //Instead of using the mapbox API to draw the users I amp these locations with p5.js and draw the users in the draw function
+      // mapboxmap.addLayer({
+      //     "id": "drone",
+      //     "type": "symbol",
+      //     "source": "drone",
+      //     "layout": {
+      //         "icon-image": "rocket-15"
+      //     }
+      // });
   });
 
 }
@@ -175,12 +182,6 @@ function initOscilator(gui){
 
     env = new p5.Env();
 
-    env.disconnect(); // so we'll only hear reverb...
-
-    // connect soundFile to reverb, process w/
-    // 3 second reverbTime, decayRate of 2%
-    reverb.process(env, 4, 5);
-
     // env.connect(reverb);
 
     env.setADSR(0.1, 0.2, 0.2, 0.1);
@@ -189,6 +190,7 @@ function initOscilator(gui){
     osc = new p5.Oscillator('sine');
     osc.amp(env);
     // osc.connect(reverb);
+
     osc.start();
 
 }
@@ -196,6 +198,8 @@ function initOscilator(gui){
 function changeNote(){
 
     var frequenci = 0;
+
+    // osc.stop();
 
     //Iterate over all the users pixel position to determine note height
     for(var z = 0; z < canvasLocations.length; z++){
@@ -208,40 +212,40 @@ function changeNote(){
           if(xy[1] > 0 && xy[1] < height/5){
             console.log('1st Area');
 
-            frequenci = pentaFreq[random(12, 14)];
+            frequenci = pentaFreq[round(random(12, 14))];
 
-            osc.freq(frequenci, 0.1);
+            osc.freq(frequenci, 0.5);
 
 
           } else if (xy[1] > height/5 && xy[1] < (height/5)*2){
             console.log('2nd Area');
 
-            frequenci = pentaFreq[random(9, 11)];
+            frequenci = pentaFreq[round(random(9, 11))];
 
-            osc.freq(frequenci, 0.1);
+            osc.freq(frequenci, 0.5);
 
           } else if (xy[1] > (height/5)*2 && xy[1] < (height/5)*3){
             console.log('3rd Area');
 
-            frequenci = pentaFreq[random(6, 8)];
+            frequenci = pentaFreq[round(random(6, 8))];
 
-            osc.freq(frequenci, 0.1);
+            osc.freq(frequenci, 0.5);
 
 
           } else if (xy[1] > (height/5)*3 && xy[1] < (height/5)*4){
             console.log('4th Area');
 
-            frequenci = pentaFreq[random(3, 5)];
+            frequenci = pentaFreq[round(random(3, 5))];
 
-            osc.freq(frequenci, 0.1);
+            osc.freq(frequenci, 0.5);
 
 
           } else if (xy[1] > (height/5)*4 && xy[1] < height){
             console.log('5th Area');
 
-            frequenci = pentaFreq[random(0, 2)];
+            frequenci = pentaFreq[round(random(0, 2))];
 
-            osc.freq(frequenci, 0.1);
+            osc.freq(frequenci, 0.5);
 
 
           } else {
@@ -253,6 +257,8 @@ function changeNote(){
       }
 
     }
+
+    // osc.start();
 
 }
 

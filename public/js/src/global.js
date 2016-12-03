@@ -40,7 +40,6 @@ var mapboxusers = {
 };
 var guiParams;
 var bBox;
-var p5Addons = false;
 
 
 

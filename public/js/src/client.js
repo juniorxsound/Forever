@@ -13,33 +13,13 @@
 Forever - Algorithmic Composition - Client side app
 Wrriten by juniorxsound (http://phenomenalabs.com)
 */
+	//Init GUI
+	initGui();
 
-		// DatGui Stuff
-		window.onload = function(){
+	// Mapbox Setup
+	initMap();
 
-		  guiParams = new initGuiParams();
-
-		  var gui = new dat.GUI();
-
-		  gui.add(guiParams, 'p5add');
-
-		  gui.add(guiParams, 'addUser');
-
-		  var mapping = gui.addFolder('Mapping');
-
-		  mapping.add(guiParams, 'Xscaler', 500, 2000);
-
-		  mapping.add(guiParams, 'Yscaler', 500, 2000);
-
-		  var playback = gui.addFolder('Playback');
-
-		  playback.add(guiParams, 'playSpeed', 0, 10);
-
-		}
-		// Mapbox Setup
-		initMap();
-
-		bBox = mapboxmap.getBounds();
+	bBox = mapboxmap.getBounds();
 
 	//Decale a new socket connection
 	socket = io();
@@ -151,18 +131,11 @@ bBox._ne.lat, height, 0);
 
 			var locations = canvasLocations[i];
 
-			//DatGui control for addons
-			if(p5Addons === true){
-
-				//Draw a rect for each user
-				rect(locations[0], locations[1], 5, 5);
-
-				rect(touchX, touchY, 10, 10);
-
-			}
+			//Draw a rect for each user
+			rect(locations[0], locations[1], 5, 5);
 
 			//If the courser reaches a user trigger the synth
-			if(parseInt(transportLine) == Math.floor(locations[0])){
+			if(round(transportLine) == round(locations[0])){
 
 				//Make sure to change the frequncy
 				changeNote();
