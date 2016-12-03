@@ -35,14 +35,6 @@ Wrriten by juniorxsound (http://phenomenalabs.com)
 
 		  playback.add(guiParams, 'playSpeed', 0, 10);
 
-		  var oscil = gui.addFolder('Oscilator');
-
-		  oscil.add(guiParams, 'AttackTime', 0.1, 5);
-
-		  oscil.add(guiParams, 'DecayTime', 0.1, 5);
-
-		  oscil.add(guiParams, 'ReleaseTime', 0.1, 5);
-
 		}
 		// Mapbox Setup
 		initMap();
@@ -126,7 +118,7 @@ bBox._ne.lat, height, 0);
 		//Setting up a canvas
 		createCanvas(windowWidth, windowHeight);
 
-		initOscilator();
+		initOscilator(guiParams);
 
 	};
 
@@ -165,6 +157,8 @@ bBox._ne.lat, height, 0);
 				//Draw a rect for each user
 				rect(locations[0], locations[1], 5, 5);
 
+				rect(touchX, touchY, 10, 10);
+
 			}
 
 			//If the courser reaches a user trigger the synth
@@ -181,6 +175,39 @@ bBox._ne.lat, height, 0);
 		}
 
 	};
+
+	//Functionality for moving the transport line during playback
+
+	function touchStarted(){
+
+		transportLine = transportLine;
+
+		// prevent default
+		return false;
+
+	}
+
+	function touchMoved() {
+
+		// if(touchX >= transportLine + 50 && touchX <= transportLine - 50){
+
+			transportLine = touchX;
+
+		// }
+
+		  // prevent default
+		  return false;
+
+	}
+
+	function touchEnded() {
+
+	  transportLine = transportLine + guiParams.playSpeed;
+
+	  // prevent default
+	  return false;
+
+	}
 
 	//Resize Canvas to Fit the Screen
 	window.onresize = function() {
