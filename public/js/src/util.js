@@ -218,6 +218,8 @@ function hitNote(){
 
             osc.freq(frequenci, 0.1);
 
+            env.play();
+
 
           } else if (xy[1] > height/5 && xy[1] < (height/5)*2){
             console.log('2nd Area');
@@ -226,12 +228,16 @@ function hitNote(){
 
             osc.freq(frequenci, 0.1);
 
+            env.play();
+
           } else if (xy[1] > (height/5)*2 && xy[1] < (height/5)*3){
             console.log('3rd Area');
 
             frequenci = pentaFreq[random(6, 8)];
 
             osc.freq(frequenci, 0.1);
+
+            env.play();
 
 
           } else if (xy[1] > (height/5)*3 && xy[1] < (height/5)*4){
@@ -241,6 +247,8 @@ function hitNote(){
 
             osc.freq(frequenci, 0.1);
 
+            env.play();
+
 
           } else if (xy[1] > (height/5)*4 && xy[1] < height){
             console.log('5th Area');
@@ -248,6 +256,8 @@ function hitNote(){
             frequenci = pentaFreq[random(0, 2)];
 
             osc.freq(frequenci, 0.1);
+
+            env.play();
 
 
           } else {
@@ -260,8 +270,6 @@ function hitNote(){
 
     }
 
-    env.play();
-
-    console.log('The note ' + pentatonicMin[selector] + ' was played');
+    // console.log('The note ' + pentatonicMin[selector] + ' was played');
 
 }
