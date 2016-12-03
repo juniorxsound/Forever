@@ -211,14 +211,35 @@ function hitNote(){
 
       if(xy[1] > 0 && xy[1] < height/5){
         console.log('1st Area');
+
+        var frequenci = pentaFreq[random(12, 14)];
+
+
       } else if (xy[1] > height/5 && xy[1] < (height/5)*2){
         console.log('2nd Area');
+
+        var frequenci = pentaFreq[random(9, 11)];
+
       } else if (xy[1] > (height/5)*2 && xy[1] < (height/5)*3){
         console.log('3rd Area');
+
+        var frequenci = pentaFreq[random(6, 8)];
+
+
       } else if (xy[1] > (height/5)*3 && xy[1] < (height/5)*4){
         console.log('4th Area');
+
+        var frequenci = pentaFreq[random(3, 5)];
+
+
       } else if (xy[1] > (height/5)*4 && xy[1] < height){
         console.log('5th Area');
+
+        var frequenci = pentaFreq[random(0, 2)];
+
+
+      } else {
+        console.log('You are currently not in the map, sorry');
       }
 
         // console.log(Math.round(xy[1]));
@@ -226,10 +247,6 @@ function hitNote(){
       }
 
     }
-
-    selector = round(random(0,20))
-
-    var frequenci = pentaFreq[selector];
 
     osc.freq(frequenci, 0.5);
 
