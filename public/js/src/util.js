@@ -258,8 +258,6 @@ function changeNote(){
 
     }
 
-    // osc.start();
-
 }
 
 function hitNote(){
