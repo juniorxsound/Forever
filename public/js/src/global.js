@@ -29,6 +29,8 @@ var cycleCounter = 0;
 var start = false;
 var frequency;
 
+var playerHover = false;
+
 var env;
 
 var freq;
@@ -41,6 +43,7 @@ var guiParams;
 var bBox;
 
 //Musical Scales
+var currentScale;
 var pentatonicMin = [70, 73, 75, 77, 79, 80, 83, 85, 87, 89, 90, 93, 95, 97, 99];
 var pentaFreq;
 

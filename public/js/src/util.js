@@ -42,12 +42,9 @@ function userCounter(print, count, div){
 
   users = count;
 
-  if( print === true ){
+  	//Get the users paragraph and print the user to it
+  	// document.getElementById("userCount").innerHTML = count;
 
-  		//Get the users paragraph and print the user to it
-  		document.getElementById(div).innerHTML = count;
-
-  }
 
 }
 
@@ -112,6 +109,8 @@ function initGuiParams() {
 function initGui(){
       // DatGui Stuff
     window.onload = function(){
+
+      masterVolume(0);
 
       guiParams = new initGuiParams();
 
@@ -199,12 +198,14 @@ function initOscilator(){
 
     SNosc = new p5.Oscillator('sine');
 
+    muteOscilators();
+
     //Processing chains and parameters
     reverb1.process(SQRosc, 5, 3, true);
-    delay1.process(reverb1, 0.12, 0.3, 1500);
+    // delay1.process(reverb1, 0.12, 0.3, 1500);
 
     reverb2.process(SNosc, 3, 5);
-    delay2.process(reverb2, 0.12, 0.5, 1500, true);
+    // delay2.process(reverb2, 0.12, 0.5, 1500, true);
 
     //Init
 
@@ -212,16 +213,18 @@ function initOscilator(){
 
     SNosc.start();
 
-    SQRosc.amp(0);
-
-    SNosc.amp(0);
-
-
 }
 
 function changeNote(){
 
+    muteOscilators();
+
     var frequenci = 0;
+
+    currentScale = pentaFreq;
+
+    //Everytime a new user batch comes in assume the current scale
+    assumeScale();
 
     //Iterate over all the users pixel position to determine note height
     for(var z = 0; z < canvasLocations.length; z++){
@@ -292,4 +295,9 @@ function hitNote(){
   env1.play(SQRosc);
   env2.play(SNosc);
 
+}
+
+function muteOscilators(){
+      SQRosc.amp(0);
+      SNosc.amp(0);
 }

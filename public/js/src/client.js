@@ -39,6 +39,8 @@ Wrriten by juniorxsound (http://phenomenalabs.com)
 
 		userCounter(false, count, 'usr');
 
+		assumeUsers();
+
 	});
 
 	//When the server sends everybody's data back
@@ -89,6 +91,9 @@ bBox._ne.lat, height, 0);
 			mapboxusers.features.push(userGeoJson);
 
 		}
+		if (start != true){
+			changeNote();
+		}
 
 	});
 
@@ -116,6 +121,14 @@ bBox._ne.lat, height, 0);
 			transportLine = transportLine + guiParams.playSpeed;
 		}
 
+		// fade the main output in only once to avoid oscilator errors on init
+		if(transportLine == 101 && cycleCounter == 0){
+
+			masterVolume(1.0, 1, 1);
+
+		}
+
+
 		//Courser
 		stroke(255, 255, 255);
 		line(transportLine, height, transportLine, 0);
@@ -135,7 +148,21 @@ bBox._ne.lat, height, 0);
 			var locations = canvasLocations[i];
 
 			//Draw a rect for each user
-			rect(locations[0], locations[1], 5, 5);
+			noStroke();
+			fill(255);
+			ellipse(locations[0], locations[1], 10, 10);
+
+			if(playerHover === true){
+				noFill();
+				strokeWeight(2);
+				stroke(255);
+				ellipse(locations[0], locations[1], 18, 18);
+				noStroke();
+				fill(255);
+				text(i + 1, locations[0] - 15, locations[1] - 15);
+
+			} 
+
 
 			//If the courser reaches a user trigger the synth
 			if(round(transportLine) == round(locations[0])){
