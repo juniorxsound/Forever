@@ -23,7 +23,7 @@ var serverGeo;
 var selector;
 var canvasLocations = [];
 var locations;
-var osc = {};
+var SQRosc;
 var transportLine = 0;
 var cycleCounter = 0;
 var start = false;
@@ -32,7 +32,6 @@ var pentaFreq;
 var env;
 var pentatonicMin = [70, 73, 75, 77, 79, 80, 83, 85, 87, 89, 90, 93, 95, 97, 99];
 var freq;
-var reverb;
 var mapboxmap;
 var mapboxusers = {
 	"type": "FeatureCollection",

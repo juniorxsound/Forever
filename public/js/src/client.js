@@ -98,7 +98,7 @@ bBox._ne.lat, height, 0);
 		//Setting up a canvas
 		createCanvas(windowWidth, windowHeight);
 
-		initOscilator(guiParams);
+		initOscilator();
 
 	};
 

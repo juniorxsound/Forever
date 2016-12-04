@@ -165,9 +165,7 @@ function initMap(){
 
 }
 
-function initOscilator(gui){
-
-    guiParams = gui;
+function initOscilator(){
 
     pentaFreq = [];
 
@@ -177,21 +175,43 @@ function initOscilator(gui){
       
     }
 
-    reverb = new p5.Reverb();
-    reverb.set(3, 500, true);
+    //Reverbs
+    var reverb1 = new p5.Reverb();
+    var reverb2 = new p5.Reverb();
 
-    env = new p5.Env();
+    //Delays
+    var delay1 = new p5.Delay();
+    var delay2 = new p5.Delay();
 
-    // env.connect(reverb);
+    //Envelope
+    env1 = new p5.Env(0.1, 0.2, 0.2, 0.1);
+    env1.setRange(1.0, 0);
 
-    env.setADSR(0.1, 0.2, 0.2, 0.1);
-    env.setRange(1.0, 0);
+    env2 = new p5.Env(0.1, 0.2, 0.2, 0.1);
+    env2.setRange(1.0, 0);
 
-    osc = new p5.Oscillator('sine');
-    osc.amp(env);
-    // osc.connect(reverb);
+    //Oscilator
+    SQRosc = new p5.Oscillator('square');
 
-    osc.start();
+    SNosc = new p5.Oscillator('sine');
+
+    //Processing chains and parameters
+    reverb1.process(SQRosc, 10, 5, true);
+    delay1.process(reverb1, 0.5, 0.7, 2300);
+
+    reverb2.process(SNosc, 5, 10);
+    delay2.process(reverb2, 0.2, 1, 1000);
+
+    //Init
+
+    SQRosc.start();
+
+    SQRosc.amp(0);
+
+    SNosc.start();
+
+    SNosc.amp(0);
+
 
 }
 
@@ -214,7 +234,8 @@ function changeNote(){
 
             frequenci = pentaFreq[round(random(12, 14))];
 
-            osc.freq(frequenci, 0.01);
+            SQRosc.freq(frequenci, 0.01);
+            SNosc.freq(frequenci, 0.01);
 
 
           } else if (xy[1] > height/5 && xy[1] < (height/5)*2){
@@ -222,14 +243,16 @@ function changeNote(){
 
             frequenci = pentaFreq[round(random(9, 11))];
 
-            osc.freq(frequenci, 0.01);
+            SQRosc.freq(frequenci, 0.01);
+            SNosc.freq(frequenci, 0.01);
 
           } else if (xy[1] > (height/5)*2 && xy[1] < (height/5)*3){
             console.log('3rd Area');
 
             frequenci = pentaFreq[round(random(6, 8))];
 
-            osc.freq(frequenci, 0.01);
+            SQRosc.freq(frequenci, 0.01);
+            SNosc.freq(frequenci, 0.01);
 
 
           } else if (xy[1] > (height/5)*3 && xy[1] < (height/5)*4){
@@ -237,7 +260,8 @@ function changeNote(){
 
             frequenci = pentaFreq[round(random(3, 5))];
 
-            osc.freq(frequenci, 0.01);
+            SQRosc.freq(frequenci, 0.01);
+            SNosc.freq(frequenci, 0.01);
 
 
           } else if (xy[1] > (height/5)*4 && xy[1] < height){
@@ -245,7 +269,8 @@ function changeNote(){
 
             frequenci = pentaFreq[round(random(0, 2))];
 
-            osc.freq(frequenci, 0.01);
+            SQRosc.freq(frequenci, 0.01);
+            SNosc.freq(frequenci, 0.01);
 
 
           } else {
@@ -262,6 +287,7 @@ function changeNote(){
 
 function hitNote(){
 
-    env.play();
+  env1.play(SQRosc);
+  // env2.play(SNosc);
 
 }
