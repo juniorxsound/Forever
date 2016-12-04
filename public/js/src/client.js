@@ -96,7 +96,7 @@ bBox._ne.lat, height, 0);
 	function setup(){
 
 		//Setting up a canvas
-		createCanvas(windowWidth, windowHeight);
+		createCanvas(window.innerWidth, window.innerHeight);
 
 		initOscilator();
 

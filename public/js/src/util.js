@@ -40,9 +40,9 @@ function userCounter(print, count, div){
 
   console.log('There are currently ' + count + ' users connected');
 
-  if( print === true ){
+  users = count;
 
-      users = count;
+  if( print === true ){
 
   		//Get the users paragraph and print the user to it
   		document.getElementById(div).innerHTML = count;
@@ -181,7 +181,9 @@ function initOscilator(){
 
     //Delays
     var delay1 = new p5.Delay();
+    delay1.setType("pingPong");
     var delay2 = new p5.Delay();
+    delay2.setType("pingpong");
 
     //Envelope
     env1 = new p5.Env(0.1, 0.2, 0.2, 0.1);
@@ -196,19 +198,19 @@ function initOscilator(){
     SNosc = new p5.Oscillator('sine');
 
     //Processing chains and parameters
-    reverb1.process(SQRosc, 10, 5, true);
+    reverb1.process(SQRosc, 5, 3, true);
     delay1.process(reverb1, 0.12, 0.3, 2300);
 
-    reverb2.process(SNosc, 5, 10);
+    reverb2.process(SNosc, 3, 5);
     delay2.process(reverb2, 0.12, 0.5, 2300, true);
 
     //Init
 
     SQRosc.start();
 
-    SQRosc.amp(0);
-
     SNosc.start();
+
+    SQRosc.amp(0);
 
     SNosc.amp(0);
 
@@ -218,8 +220,6 @@ function initOscilator(){
 function changeNote(){
 
     var frequenci = 0;
-
-    // osc.stop();
 
     //Iterate over all the users pixel position to determine note height
     for(var z = 0; z < canvasLocations.length; z++){
@@ -288,6 +288,6 @@ function changeNote(){
 function hitNote(){
 
   env1.play(SQRosc);
-  // env2.play(SNosc);
+  env2.play(SNosc);
 
 }
