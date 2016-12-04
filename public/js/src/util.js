@@ -127,6 +127,8 @@ function initGui(){
 
       playback.add(guiParams, 'playSpeed', 0, 10);
 
+      dat.GUI.toggleHide();
+
     }
 }
 
@@ -199,10 +201,10 @@ function initOscilator(){
 
     //Processing chains and parameters
     reverb1.process(SQRosc, 5, 3, true);
-    delay1.process(reverb1, 0.12, 0.3, 2300);
+    delay1.process(reverb1, 0.12, 0.3, 1500);
 
     reverb2.process(SNosc, 3, 5);
-    delay2.process(reverb2, 0.12, 0.5, 2300, true);
+    delay2.process(reverb2, 0.12, 0.5, 1500, true);
 
     //Init
 

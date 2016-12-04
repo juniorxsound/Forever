@@ -11,10 +11,13 @@
 	<!--Scoket.io-->
 	<script src="js/lib/socket.io-1.4.5.js"></script>
 
+	<!-- jQuery -->
+	<script src="js/lib/jquery-3.1.1.min.js"></script>
+
 	<!-- P5.js -->
 	<script src="js/lib/p5.min.js"></script>
 
-	<!-- Tone.js -->
+	<!-- p5.sound.js -->
 	<script src="js/lib/p5.sound.min.js"></script>
 
 	<!--Client Side Global Variables=-->
@@ -24,23 +27,33 @@
 	<script src="js/src/util.js"></script>
 
 	<!-- Canvas and p5.js Utilities -->
-	<script type="js/src/canvas.js"></script>
+	<script src="js/src/canvas.js"></script>
+
+	<!-- UI lib -->
+	<script src="js/src/ui.js"></script>
 
 	<!-- Mapbox maps -->
     <script src='js/lib/mapbox-gl.js'></script>
     <link href='js/lib/mapbox-gl.css' rel='stylesheet' />
 
-    <!-- Marcetor -->
-    <script src="js/lib/sphericalmercator.js"></script>
-
 	<!--Client Side CSS-->
 	<link rel="stylesheet" href="css/client.css">
 
-	<!-- Dat Gui for debugging -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<!-- Dat Gui for debugging - clean before deployment -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
 
 </head>
 <body>
+
+<!-- Interface -->
+<div id="main-interface">
+	<div id="info-bar">
+
+	</div>
+
+</div>
 
 <!-- Map container -->
 <div id="map" class="map mapboxgl-map"></div>

@@ -13,8 +13,11 @@
 Forever - Algorithmic Composition - Client side app
 Wrriten by juniorxsound (http://phenomenalabs.com)
 */
-	//Init GUI
+	// Init debugging dat.GUI
 	initGui();
+
+	// Init graphical interface
+	initInterface();
 
 	// Mapbox Setup
 	initMap();
