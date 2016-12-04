@@ -197,10 +197,10 @@ function initOscilator(){
 
     //Processing chains and parameters
     reverb1.process(SQRosc, 10, 5, true);
-    delay1.process(reverb1, 0.12, 0.7, 2300);
+    delay1.process(reverb1, 0.12, 0.3, 2300);
 
     reverb2.process(SNosc, 5, 10);
-    delay2.process(reverb2, 0.12, 0.9, 2300, true);
+    delay2.process(reverb2, 0.12, 0.5, 2300, true);
 
     //Init
 
