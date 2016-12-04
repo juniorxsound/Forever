@@ -185,7 +185,7 @@ function initOscilator(){
 
     //Envelope
     env1 = new p5.Env(0.1, 0.2, 0.2, 0.1);
-    env1.setRange(1.0, 0);
+    env1.setRange(0.6, 0);
 
     env2 = new p5.Env(0.1, 0.2, 0.2, 0.1);
     env2.setRange(1.0, 0);
@@ -200,7 +200,7 @@ function initOscilator(){
     delay1.process(reverb1, 0.5, 0.7, 2300);
 
     reverb2.process(SNosc, 5, 10);
-    delay2.process(reverb2, 0.2, 1, 1000);
+    delay2.process(reverb2, 0.9, 0.9, 2300, true);
 
     //Init
 
