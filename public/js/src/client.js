@@ -123,7 +123,7 @@ bBox._ne.lat, height, 0);
 		}
 
 		// fade the main output in only once to avoid oscilator errors on init
-		if(transportLine >= 101 && cycleCounter == 0){
+		if(transportLine == 100 && cycleCounter == 0){
 
 			masterVolume(1.0, 1, 1);
 
@@ -184,6 +184,13 @@ bBox._ne.lat, height, 0);
 
 			//If the courser reaches a user trigger the synth
 			if(round(transportLine) == round(locations[0])){
+
+				//Make sure the master volume is on
+				if(masterVolume().value != 1){
+
+					masterVolume(1);
+
+				}
 
 				//Make sure to change the frequncy
 				changeNote();
