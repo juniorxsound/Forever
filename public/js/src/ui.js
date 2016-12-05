@@ -3,16 +3,17 @@ function initInterface(){
 
 	$(document).ready(function(){
 
-		assumeOrientetion();
-
 		assumeScale();
 
-		//Registar event listener to assume orientetion
-		$( window ).resize(function() {
+		if(!window.mobileAndTabletcheck()){
 
-			assumeOrientetion();
+				if($('#info-bar').hasClass('landscape') === true){
 
-		}); 
+					$('#info-bar').removeClass('landscape');
+
+				}
+
+				$('#info-bar').addClass('portrait');
 
 		//Player hover effect
 		$('#userIcon').mouseenter(function(){
@@ -51,31 +52,11 @@ function initInterface(){
 			$('#currentScale').fadeOut(250);
 
 		});
-		
-	});
 
-}
+		} else {
+			// $('#main-interface').hide();
 
-function assumeOrientetion(){
-	  		if(window.innerHeight > window.innerWidth) {
-    			var portrait = true;
-			}
-			else {
-    			var portrait = false;
-			}
-
-			if( portrait === false ){
-
-				if($('#info-bar').hasClass('landscape') === true){
-
-					$('#info-bar').removeClass('landscape');
-
-				}
-
-				$('#info-bar').addClass('portrait');
-
-			} else if ( portrait === true ){
-
+			//Change the menu bar to landscape
 				if($('#info-bar').hasClass('portrait') === true){
 
 					$('#info-bar').removeClass('portrait');
@@ -84,7 +65,9 @@ function assumeOrientetion(){
 
 				$('#info-bar').addClass('landscape');
 
-			}
+		}
+	});
+
 }
 
 function assumeScale(){

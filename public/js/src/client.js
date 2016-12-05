@@ -159,10 +159,12 @@ bBox._ne.lat, height, 0);
 				ellipse(locations[0], locations[1], 18, 18);
 				noStroke();
 				fill(255);
-				text(i + 1, locations[0] - 15, locations[1] - 15);
-
-			} 
-
+				if(isOdd(i+1) == true){
+					text(i + 1, locations[0] - 15, locations[1] - 15);
+				} else {
+					text(i + 1, locations[0] + 15, locations[1] - 15);
+				}
+			}
 
 			//If the courser reaches a user trigger the synth
 			if(round(transportLine) == round(locations[0])){
@@ -180,6 +182,18 @@ bBox._ne.lat, height, 0);
 	};
 
 	//Functionality for moving the transport line during playback
+	function mouseMoved(){
+		if(winMouseX <= transportLine + 100 && winMouseX >= transportLine - 100){
+
+			dragCursor();
+ 
+		} else {
+
+	  		defaultCursor();
+
+		}
+
+	}
 
 	function touchStarted(){
 
