@@ -194,19 +194,22 @@ function initOscilator(){
     env2.setRange(1.0, 0);
 
     //Oscilator
+
+    DRONEosc = new p5.Oscillator('sawtooth');
+
     SQRosc = new p5.Oscillator('square');
 
     SNosc = new p5.Oscillator('sine');
 
-    DRONEosc = new p5.Oscillator('sawtooth');
+    
 
     muteOscilators();
 
     //Processing chains and parameters
-    reverb1.process(SQRosc, 5, 7, true);
+    reverb1.process(SQRosc, 5, 3, true);
     // delay1.process(reverb1, 0.12, 0.3, 1500);
 
-    reverb2.process(SNosc, 5, 7);
+    reverb2.process(SNosc, 3, 5);
     // delay2.process(reverb2, 0.12, 0.5, 1500, true);
 
     //Init
@@ -215,7 +218,7 @@ function initOscilator(){
 
     SNosc.start();
 
-    // DRONEosc.start();
+    DRONEosc.start();
 
 }
 
@@ -304,6 +307,7 @@ function hitNote(){
 function muteOscilators(){
       SQRosc.amp(0);
       SNosc.amp(0);
+      DRONEosc.amp(0);
 }
 
 function isOdd(num) { 
