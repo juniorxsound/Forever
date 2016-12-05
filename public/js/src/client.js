@@ -97,7 +97,8 @@ bBox._ne.lat, height, 0);
 
 	});
 
-
+	var diameter; 
+	var angle = 0;
 
 	function preload(){};
 
@@ -108,13 +109,16 @@ bBox._ne.lat, height, 0);
 
 		initOscilator();
 
+		diameter = 20;
+
 	};
 
 
 
 	function draw(){
+		//Yes it means clear
 		clear();
-
+		
 		//Don't start before the server sends off gps data
 		if(start == true){
 			//Transport courser increment
@@ -153,6 +157,8 @@ bBox._ne.lat, height, 0);
 			ellipse(locations[0], locations[1], 10, 10);
 
 			if(playerHover === true){
+				fill(255,255,255, 100);
+				ellipse(locations[0], locations[1], 20 + (sin(angle) * diameter/2) + diameter/2, 20 + (sin(angle) * diameter/2) + diameter/2);
 				noFill();
 				strokeWeight(2);
 				stroke(255);
@@ -164,6 +170,7 @@ bBox._ne.lat, height, 0);
 				} else {
 					text(i + 1, locations[0] + 15, locations[1] - 15);
 				}
+			  angle += 0.02;
 			}
 
 			//If the courser reaches a user trigger the synth
@@ -178,6 +185,7 @@ bBox._ne.lat, height, 0);
 			}
 
 		}
+
 
 	};
 
