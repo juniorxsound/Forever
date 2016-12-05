@@ -97,7 +97,7 @@ bBox._ne.lat, height, 0);
 
 	});
 
-	var diameter; 
+	var diameter = 20;
 	var angle = 0;
 
 	function preload(){};
@@ -108,8 +108,6 @@ bBox._ne.lat, height, 0);
 		createCanvas(window.innerWidth, window.innerHeight);
 
 		initOscilator();
-
-		diameter = 20;
 
 	};
 

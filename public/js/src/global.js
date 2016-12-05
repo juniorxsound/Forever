@@ -29,6 +29,9 @@ var cycleCounter = 0;
 var start = false;
 var frequency;
 
+  var diameter = 20;
+  var angle = 0;
+
 var playerHover = false;
 
 var env;
