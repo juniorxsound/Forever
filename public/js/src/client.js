@@ -97,8 +97,7 @@ bBox._ne.lat, height, 0);
 
 	});
 
-	var diameter = 20;
-	var angle = 0;
+
 
 	function preload(){};
 
@@ -168,7 +167,19 @@ bBox._ne.lat, height, 0);
 				} else {
 					text(i + 1, locations[0] + 15, locations[1] - 15);
 				}
-			  angle += 0.02;
+			  angle += 0.01;
+			}
+
+			if(scaleHover === true){
+			  var colorMult = 200;
+				for(var scaleSqr = 0; scaleSqr <= height; scaleSqr += height/5){
+					colorMult -= 25;
+					stroke(255,255,255,100);
+					strokeWeight(1)
+					fill(colorMult,colorMult,colorMult, 50);
+					rect(0,scaleSqr - height/5, width, scaleSqr);
+				}
+
 			}
 
 			//If the courser reaches a user trigger the synth
@@ -189,7 +200,7 @@ bBox._ne.lat, height, 0);
 
 	//Functionality for moving the transport line during playback
 	function mouseMoved(){
-		if(winMouseX <= transportLine + 100 && winMouseX >= transportLine - 100){
+		if(winMouseX <= transportLine + 50 && winMouseX >= transportLine - 50){
 
 			dragCursor();
  
@@ -204,7 +215,7 @@ bBox._ne.lat, height, 0);
 	function touchStarted(){
 
 	//Clamp the selection area to 200px around the transport line
-		if(touchX <= transportLine + 100 && touchX >= transportLine - 100){
+		if(touchX <= transportLine + 50 && touchX >= transportLine - 50){
 
 			transportLine = transportLine;
 
@@ -218,7 +229,7 @@ bBox._ne.lat, height, 0);
 	function touchMoved() {
 
 		//Clamp the selection area to 200px around the transport line
-		if(touchX <= transportLine + 100 && touchX >= transportLine - 100){
+		if(touchX <= transportLine + 50 && touchX >= transportLine - 50){
 
 			transportLine = touchX;
 

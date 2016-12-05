@@ -39,18 +39,18 @@ canvas{
 /*Util*/
 .spacer{
 	position: relative;
-	height: 10vh;
+	height: 2.8vh;
 }
 #userIcon{
 	position: absolute;
-	top: 17%;
-	margin-left: 25%;
+	top: 22%;
+	margin-left: 33%;
 	opacity: 0.5;
 }
 #scaleIcon{
 	position: absolute;
-	top: 25%;
-	margin-left: 20%;
+	top: 32%;
+	margin-left: 25%;
 	opacity: 0.5;
 }
 /*Interface*/
@@ -77,8 +77,8 @@ canvas{
 	display: none;
 	background-color: #222222;
 	width: 120%;
-	left: 120px;
-	top: 17%;
+	left: 100px;
+	top: 20%;
 	padding: 7px; padding-left: 10px; padding-right: 10px;
 	text-align: left;
 }
@@ -87,8 +87,8 @@ canvas{
 	position: absolute;
 	background-color: #222222;
 	width: 120%;
-	left: 120px;
-	top: 25%;
+	left: 100px;
+	top: 30%;
 	padding: 7px; padding-left: 10px; padding-right: 10px;
 	text-align: left;
 }

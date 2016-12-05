@@ -39,13 +39,21 @@ function initInterface(){
 		//Scale hover effect
 		$('#scaleIcon').mouseenter(function(){
 
+			scaleHover = true;
+
 			$('#scaleIcon').css({opacity: 1});
 
-			$('#currentScale').fadeIn(250);
+			if($('#currentScale').html() != ""){
+
+				$('#currentScale').fadeIn(250);
+
+			}
 
 		});
 
 		$('#scaleIcon').mouseleave(function(){
+
+			scaleHover = false;
 
 			$('#scaleIcon').css({opacity: 0.5});
 
