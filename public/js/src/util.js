@@ -198,13 +198,15 @@ function initOscilator(){
 
     SNosc = new p5.Oscillator('sine');
 
+    DRONEosc = new p5.Oscillator('sawtooth');
+
     muteOscilators();
 
     //Processing chains and parameters
-    reverb1.process(SQRosc, 5, 3, true);
+    reverb1.process(SQRosc, 5, 7, true);
     // delay1.process(reverb1, 0.12, 0.3, 1500);
 
-    reverb2.process(SNosc, 3, 5);
+    reverb2.process(SNosc, 5, 7);
     // delay2.process(reverb2, 0.12, 0.5, 1500, true);
 
     //Init
@@ -212,6 +214,8 @@ function initOscilator(){
     SQRosc.start();
 
     SNosc.start();
+
+    // DRONEosc.start();
 
 }
 

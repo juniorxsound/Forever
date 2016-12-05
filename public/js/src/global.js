@@ -24,19 +24,17 @@ var selector;
 var canvasLocations = [];
 var locations;
 var SQRosc;
+var SNosc;
+var DRONEosc;
 var transportLine = 0;
 var cycleCounter = 0;
 var start = false;
 var frequency;
-
 var diameter = 20;
 var angle = 0;
-
 var playerHover = false;
 var scaleHover = false;
-
 var env;
-
 var freq;
 var mapboxmap;
 var mapboxusers = {
