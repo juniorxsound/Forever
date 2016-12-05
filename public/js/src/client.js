@@ -123,7 +123,7 @@ bBox._ne.lat, height, 0);
 		}
 
 		// fade the main output in only once to avoid oscilator errors on init
-		if(transportLine == 101 && cycleCounter == 0){
+		if(transportLine >= 101 && cycleCounter == 0){
 
 			masterVolume(1.0, 1, 1);
 
