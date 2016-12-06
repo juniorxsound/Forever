@@ -1,3 +1,31 @@
+/*
+      ___          ___          ___          ___         ___          ___          ___     
+     /\  \        /\  \        /\  \        /\  \       /\__\        /\  \        /\  \    
+    /::\  \      /::\  \      /::\  \      /::\  \     /:/  /       /::\  \      /::\  \   
+   /:/\:\  \    /:/\:\  \    /:/\:\  \    /:/\:\  \   /:/  /       /:/\:\  \    /:/\:\  \  
+  /::\~\:\  \  /:/  \:\  \  /::\~\:\  \  /::\~\:\  \ /:/__/  ___  /::\~\:\  \  /::\~\:\  \ 
+ /:/\:\ \:\__\/:/__/ \:\__\/:/\:\ \:\__\/:/\:\ \:\__\|:|  | /\__\/:/\:\ \:\__\/:/\:\ \:\__\
+ \/__\:\ \/__/\:\  \ /:/  /\/_|::\/:/  /\:\~\:\ \/__/|:|  |/:/  /\:\~\:\ \/__/\/_|::\/:/  /
+      \:\__\   \:\  /:/  /    |:|::/  /  \:\ \:\__\  |:|__/:/  /  \:\ \:\__\     |:|::/  / 
+       \/__/    \:\/:/  /     |:|\/__/    \:\ \/__/   \::::/__/    \:\ \/__/     |:|\/__/  
+                 \::/  /      |:|  |       \:\__\      ~~~~         \:\__\       |:|  |    
+                  \/__/        \|__|        \/__/                    \/__/        \|__|    
+Forever - Algorithmic Composition - Client side UI lib
+Wrriten by juniorxsound (http://phenomenalabs.com)
+*/
+
+//Function for fading in & out the sound on tab focus and blur
+window.onblur = function(){
+
+	masterVolume(0, 0.5);
+
+};
+
+window.onfocus = function(){
+
+	masterVolume(1.0, 0.5);
+
+};
 
 function initInterface(){
 
@@ -5,73 +33,86 @@ function initInterface(){
 
 		assumeScale();
 
+		//It's a desktop
 		if(!window.mobileAndTabletcheck()){
 
-				if($('#info-bar').hasClass('landscape') === true){
-
-					$('#info-bar').removeClass('landscape');
-
-				}
+			system = 'desktop';
 
 				$('#info-bar').addClass('portrait');
 
-		//Player hover effect
+		//Player hover&click effect
+		$('#userIcon').click(function(){
+
+			if(playerClick === false){
+
+				playerClick = true;
+
+				$('#userIcon').css({opacity: 1});
+
+			} else {
+
+				playerClick = false;
+
+				$('#userIcon').css({opacity: 0.5});
+
+			}
+
+		});
+
 		$('#userIcon').mouseenter(function(){
 
-			playerHover = true;
-
-			$('#userIcon').css({opacity: 1});
-
 			$('#userCount').fadeIn(250);
+
+			defaultCursor();
 
 		});
 
 		$('#userIcon').mouseleave(function(){
-
-			playerHover = false;
-
-			$('#userIcon').css({opacity: 0.5});
 
 			$('#userCount').fadeOut(250);
 
 		});
 
 		//Scale hover effect
-		$('#scaleIcon').mouseenter(function(){
+		$('#scaleIcon').click(function(){
 
-			scaleHover = true;
+			if(scaleClick === false){
 
-			$('#scaleIcon').css({opacity: 1});
+				scaleClick = true;
 
-			if($('#currentScale').html() != ""){
+				$('#scaleIcon').css({opacity: 1});
 
-				$('#currentScale').fadeIn(250);
+			} else {
+
+				scaleClick = false;
+
+				$('#scaleIcon').css({opacity: 0.5});
 
 			}
 
 		});
 
+		$('#scaleIcon').mouseenter(function(){			
+
+				$('#currentScale').fadeIn(250);
+
+				defaultCursor();
+
+		});
+
 		$('#scaleIcon').mouseleave(function(){
-
-			scaleHover = false;
-
-			$('#scaleIcon').css({opacity: 0.5});
 
 			$('#currentScale').fadeOut(250);
 
 		});
-
+		//It's a mobile
 		} else {
 			// $('#main-interface').hide();
+			system = 'mobile';
 
 			//Change the menu bar to landscape
-				if($('#info-bar').hasClass('portrait') === true){
 
-					$('#info-bar').removeClass('portrait');
-
-				}
-
-				$('#info-bar').addClass('landscape');
+					$('#info-bar').addClass('portrait');
 
 		}
 	});
