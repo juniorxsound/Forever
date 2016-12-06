@@ -46,7 +46,11 @@ function draw(){
 		//Logic for drawing and controlling the users
 		drawUsers();
 
+		//Control the filter over time
 		controlFilter();
+
+		//Water color hit to signify new bar
+		// waterHit();
 
 };
 
@@ -60,19 +64,19 @@ function drawUsers(){
 
 			//Draw a rect for each user
 			noStroke();
-			fill(255);
+			fill(0);
 			ellipse(locations[0], locations[1], 10, 10);
 
 			//If you hover over the user icon
 			if(playerClick === true){
-				fill(255,255,255, 25);
+				fill(0,0,0, 25);
 				ellipse(locations[0], locations[1], 50 + (sin(angle) * diameter/2) + diameter/2, 50 + (sin(angle) * diameter/2) + diameter/2);
 				noFill();
 				strokeWeight(2);
-				stroke(255);
-				ellipse(locations[0], locations[1], 18, 18);
+				stroke(0);
+				ellipse(locations[0], locations[1], (cos(angle) * diameter/2) + diameter/2, (cos(angle) * diameter/2) + diameter/2);
 				noStroke();
-				fill(255);
+				fill(0);
 				if(isOdd(i+1) == true){
 					text(i + 1, locations[0] - 15, locations[1] - 15);
 				} else {
@@ -86,7 +90,7 @@ function drawUsers(){
 			  var colorMult = 200;
 				for(var scaleSqr = 0; scaleSqr <= height; scaleSqr += height/5){
 					colorMult -= 25;
-					stroke(255,255,255,100);
+					stroke(0,0,0,100);
 					strokeWeight(1)
 					fill(colorMult,colorMult,colorMult, 50);
 					rect(0,scaleSqr - height/5, width, scaleSqr);
@@ -122,7 +126,15 @@ function drawUsers(){
 
 			transportLine = transportLine;
 
-		}
+			movingCursor = true;
+
+		} 
+
+		// else {
+
+		// 	relativeStart = touchX;
+
+		// }
 
 		// prevent default
 		return false;
@@ -132,11 +144,17 @@ function drawUsers(){
 	function touchMoved() {
 
 		//Clamp the selection area to 200px around the transport line
-		if(touchX <= transportLine + 50 && touchX >= transportLine - 50){
+		if(touchX <= transportLine + 50 && touchX >= transportLine - 50 && movingCursor === true){
 
 			transportLine = touchX;
 
-		}
+		} 
+
+		// else if (relatveStart != 0){
+
+		// 	line(relativeStart, height/2, touchX, width/2);
+
+		// }
 
 		  // prevent default
 		  return false;
@@ -146,6 +164,14 @@ function drawUsers(){
 	function touchEnded() {
 
 	  transportLine = transportLine + guiParams.playSpeed;
+
+	  movingCursor = false;
+
+	  // if(relativeStart != 0){
+
+	  // 	relativeEnd = touchX;
+
+	  // }
 
 	  // prevent default
 	  return false;

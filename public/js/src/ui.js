@@ -14,6 +14,23 @@ Forever - Algorithmic Composition - Client side UI lib
 Wrriten by juniorxsound (http://phenomenalabs.com)
 */
 
+
+//Functionality to determine which device
+
+if(!window.mobileAndTabletcheck()){
+
+	system = 'desktop';
+
+	console.log('You are logging from a desktop, nice!');
+
+} else {
+
+	system = 'mobile';
+
+	console.log('Your are logging from a mobile, YES!');
+
+}
+
 //Function for fading in & out the sound on tab focus and blur
 window.onblur = function(){
 
@@ -33,12 +50,8 @@ function initInterface(){
 
 		assumeScale();
 
-		//It's a desktop
-		if(!window.mobileAndTabletcheck()){
-
-			system = 'desktop';
-
-				$('#info-bar').addClass('portrait');
+		//Add the class to the info bar
+		$('#info-bar').addClass('portrait');
 
 		//Player hover&click effect
 		$('#userIcon').click(function(){
@@ -105,16 +118,6 @@ function initInterface(){
 			$('#currentScale').fadeOut(250);
 
 		});
-		//It's a mobile
-		} else {
-			// $('#main-interface').hide();
-			system = 'mobile';
-
-			//Change the menu bar to landscape
-
-					$('#info-bar').addClass('portrait');
-
-		}
 	});
 
 }

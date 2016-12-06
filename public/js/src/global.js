@@ -70,6 +70,8 @@ var guiParams;
 //Store the system logged in
 var system = null;
 
+var movingCursor = false;
+
 //Musical Scales
 var frequency;
 var currentScale;
@@ -77,6 +79,11 @@ var pentatonicMin = [59, 62, 64, 67, 69, 71, 74, 76, 79, 81, 83, 86, 88, 91, 93]
 var pentatonicLow = [31, 33, 35, 38, 40, 43, 45, 47, 50, 52, 55];
 var pentaLowFreq = [];
 var pentaFreq = [];
+
+var isLoop = false;
+
+//debug
+var mapboxctx;
 
 
 

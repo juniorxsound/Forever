@@ -135,14 +135,32 @@ function initMap(){
     //Mapbox API token
     mapboxgl.accessToken = 'pk.eyJ1IjoianVuaW9yeHNvdW5kIiwiYSI6ImNpdnlyMG9hZjAyamwydHRhNGRqZ3BhZGQifQ.hIDvif6XFSretP-RSqBtHQ';
 
-    //Create a new map object
-    mapboxmap = new mapboxgl.Map({
+    var mapParams = {};
+
+    if( system == 'mobile' ){
+
+      mapParams = {
       container: 'map', // container id
-      style: 'mapbox://styles/juniorxsound/ciw3v1jb300292jr1pf3y40c5', //stylesheet location
+      style: 'mapbox://styles/juniorxsound/ciwdqlveu00102pnatdlaaes0', //stylesheet location
       center: [-73.98, 40.74278],
       zoom: 11, // starting zoom
       zoomControl: false
-    });
+      };
+
+    } else if( system == 'desktop' ) {
+
+      mapParams = {
+      container: 'map', // container id
+      style: 'mapbox://styles/juniorxsound/ciwdqlveu00102pnatdlaaes0', //stylesheet location
+      center: [-73.98, 40.74278],
+      zoom: 12, // starting zoom
+      zoomControl: false
+      };
+
+    }
+    
+    //Create a new map object
+    mapboxmap = new mapboxgl.Map(mapParams);
 
     //Setup event listeners and invterval to refetch the users
     mapboxmap.on('load', function () {
@@ -271,7 +289,7 @@ function controlFilter(){
 
   filter.res((sin(angle) * diameter/2) + diameter/2);
 
-  filter2.res((cos(angle) * diameter/2) + diameter/2)
+  filter2.res((cos(angle) * diameter/2) + diameter/2);
 
 };
 
@@ -444,8 +462,7 @@ function cursorController(){
 
 
     //Courser
-    fill(255);
-    stroke(255, 255, 255);
+    stroke(0, 0, 0);
     strokeWeight(1);
     line(transportLine, height, transportLine, 0);
 
@@ -473,6 +490,9 @@ function cursorController(){
           masterVolume(1);
 
         };
+
+        //Make the streets change color on note hit
+        streetHit(200);
 
         //Make sure to change the frequncy
         changeNote();
@@ -540,5 +560,34 @@ bBox._ne.lat, height, 0);
       changeNote();
 
     };
+
+};
+
+//Make the streets change color on note hit
+function streetHit(sustain){
+
+          mapboxmap.setPaintProperty('road-main-case', 'line-color', '#000000');
+
+         setTimeout(function(){
+
+          mapboxmap.setPaintProperty('road-main-case', 'line-color', '#ffffff');
+
+         }, sustain);
+
+};
+
+function waterHit(){
+
+  if(cycleCounter != 0 && transportLine == relativeStart) {
+
+    mapboxmap.setPaintProperty('water', 'fill-opacity', 1);
+
+    setTimeout(function(){
+
+      mapboxmap.setPaintProperty('water', 'fill-opacity', 0);
+
+    }, 100);
+
+  };
 
 };

@@ -13,6 +13,8 @@
 Forever - Algorithmic Composition - Client side app
 Wrriten by juniorxsound (http://phenomenalabs.com)
 */
+
+
 	// Init debugging dat.GUI
 	initGui();
 
