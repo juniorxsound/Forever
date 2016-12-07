@@ -42,34 +42,41 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 
 	<!-- Google Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora|Raleway:100,400,700,900" rel="stylesheet">
 
 	<!-- Dat Gui for debugging - clean before deployment -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
 
 </head>
 <body>
+<!-- Intro -->
+<div id="intro-container">
+	
+<div id="explain" class="vertical-align">This is an algoritmic music composition experiment based on your location</div>
+<div id="explain2" class="vertical-align">Please allow location sharing in your browser</div>
+<div id="headphones" class="vertical-align">It is recommended using headphones</div>
 
-<!-- Interface - Desktop -->
-<div id="main-interface">
-	<div id="info-bar">
-		<div class="spacer"></div>
-		<div id="icon">F</div>
-		<div id="seperator"></div>
-		<!-- users -->
-		<img width="33" id="userIcon" src="images/ui/users.png" />
-		<div id="userCount"></div>
-		<!-- scales -->
-		<img width="47" id="scaleIcon" src="images/ui/scale.png" />
-		<div id="currentScale"></div>
-	</div>
 </div>
+	<!-- Interface - Desktop -->
+	<div id="experience-container">
+	<div id="main-interface">
+		<div id="info-bar">
+			<div id="icon">FOREVER</div>
+			<div id="icon-text">MULTIPLAYER MUSIC COMPOSITION</div>
+			<div id="seperator"></div>
+			<!-- users -->
+			<img width="33" id="userIcon" src="images/ui/users.png" />
+			<div id="userCount"></div>
+			<!-- scales -->
+			<img width="47" id="scaleIcon" src="images/ui/scale.png" />
+			<div id="currentScale"></div>
+		</div>
+	</div>
 
-<!-- Map container -->
-<div id="map" class="map mapboxgl-map"></div>
+	<!-- Map container -->
+	<div id="map" class="map mapboxgl-map"></div>
 
-<!-- Masking canvas -->
-<canvas id="maskCanvas"></canvas>
+</div>
 
 <!-- Client side app -->
 <script src="js/src/client.js"></script>

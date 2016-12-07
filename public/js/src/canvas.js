@@ -56,7 +56,7 @@ function draw(){
 
 //Draw users
 function drawUsers(){
-
+	if(start === true){
 		//Iterate over the array that stores users pixel postions
 		for(var i = 0; i < canvasLocations.length; i++){
 
@@ -66,15 +66,17 @@ function drawUsers(){
 			noStroke();
 			fill(0);
 			ellipse(locations[0], locations[1], 10, 10);
+			fill(0,0,0, 25);
+			ellipse(locations[0], locations[1], 50 + (sin(angle) * diameter/2) + diameter/2, 50 + (sin(angle) * diameter/2) + diameter/2);
+			noFill();
+			strokeWeight(1);
+			stroke(0);
+			ellipse(locations[0], locations[1], (cos(angle) * diameter/2) + diameter/2, (cos(angle) * diameter/2) + diameter/2);
+			ellipse(locations[0], locations[1], (cos(angle + 0.5) * diameter), (cos(angle + 0.5) * diameter));
+			ellipse(locations[0], locations[1], (cos(angle + 1) * diameter) - diameter, (cos(angle + 1) * diameter) - diameter);
 
 			//If you hover over the user icon
 			if(playerClick === true){
-				fill(0,0,0, 25);
-				ellipse(locations[0], locations[1], 50 + (sin(angle) * diameter/2) + diameter/2, 50 + (sin(angle) * diameter/2) + diameter/2);
-				noFill();
-				strokeWeight(2);
-				stroke(0);
-				ellipse(locations[0], locations[1], (cos(angle) * diameter/2) + diameter/2, (cos(angle) * diameter/2) + diameter/2);
 				noStroke();
 				fill(0);
 				if(isOdd(i+1) == true){
@@ -99,6 +101,8 @@ function drawUsers(){
 			}
 
 		}
+
+	}
 
 	angle += 0.01;
 

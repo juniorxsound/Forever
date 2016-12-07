@@ -24,6 +24,9 @@ Wrriten by juniorxsound (http://phenomenalabs.com)
 	// Mapbox Setup
 	initMap();
 
+	//Init the geo watch
+	getGeoPosition(false, 'location');
+
 	//Get the map bounderies, only called once and then called by window resize
 	bBox = mapboxmap.getBounds();
 
@@ -52,11 +55,3 @@ Wrriten by juniorxsound (http://phenomenalabs.com)
 		analyseServerGeoData(geodata);
 
 	});
-
-	//Never give up pushing the data!
-  	setInterval(function(){
-
-  		//1st Argument is wheter to appand the value to the DOM second is the div
-	  	var geodata = getGeoPosition(false, 'location');
-
-  	}, 1000);

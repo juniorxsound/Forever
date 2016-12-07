@@ -55,16 +55,25 @@ function getGeoPosition(print, div){
 
 	if (navigator.geolocation) {
 
-	    navigator.geolocation.getCurrentPosition(function ( pos ) {
+    var options;
 
-	    		socket.emit('geolocation', pos.coords.latitude + "," + pos.coords.longitude);
+    function success(pos) {
 
-                if(print){
+      socket.emit('geolocation', pos.coords.latitude + "," + pos.coords.longitude);
 
-                	document.getElementById(div).innerHTML = 'Lat: ' + pos.coords.latitude + ' Long: ' + pos.coords.longitude;
+    }
 
-                }
-    	});
+    function error(err) {
+      console.warn('ERROR(' + err.code + '): ' + err.message);
+    }
+
+    navigator.geolocation.watchPosition(success, error);
+
+      if(print){
+
+        document.getElementById(div).innerHTML = 'Lat: ' + pos.coords.latitude + ' Long: ' + pos.coords.longitude;
+
+      }
 
 	} else {
 
@@ -520,9 +529,9 @@ function analyseServerGeoData(geodata){
 
       setTimeout(function(){
 
-        start = true;
+        // start = true;
 
-        console.log('Cursor started');
+        // console.log('Cursor started');
 
       }, 2000);
 

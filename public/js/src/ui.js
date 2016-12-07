@@ -40,13 +40,46 @@ window.onblur = function(){
 
 window.onfocus = function(){
 
-	masterVolume(1.0, 0.5);
+	if(getMasterVolume() != 1){
+
+		masterVolume(1.0, 0.5);
+
+	}
 
 };
 
 function initInterface(){
 
 	$(document).ready(function(){
+
+		//Ui Intro
+		$('#explain').delay(1000).fadeIn(1000, function(){
+
+			$('#explain2').delay(500).fadeIn(1000, function(){
+
+				$('#explain2').delay(3000).fadeOut(500,function(){
+
+					$('#explain').fadeOut(500, function(){
+
+						$('#headphones').delay(250).fadeIn(500, function(){
+
+							start = true;
+
+							$('#headphones').delay(3000).fadeOut(500, function(){
+
+								$('#intro-container').fadeOut(1000);
+
+							});
+
+						});
+
+					});
+
+				});
+
+			});
+
+		});
 
 		assumeScale();
 
