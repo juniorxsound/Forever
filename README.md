@@ -4,12 +4,4 @@ Forever is a multiplayer algorithmic music composition based on users location i
 
 To start the server simply `npm run start`
 
-## Forever uses
-####Server:
-1. [Express](http://expressjs.com/)
-2 [socket.io](http://socket.io/)
-
-####Client
-1. [p5.js](https://github.com/processing/p5.js)
-2 [p5.js-sound](https://github.com/processing/p5.js-sound)
-3. [jQuery]()
+>Forever was built as a part of ICM course @ ITP, NYU
